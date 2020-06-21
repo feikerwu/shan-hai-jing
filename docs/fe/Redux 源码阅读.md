@@ -1,6 +1,6 @@
 # redux 源码浅析
 
-最近在把主力开发框架从 vue 转化到 react，对 redux 相关比较感兴趣，拉了 redux 的源码看了下，这里做下源码分析，方便有需要的同学去用。
+最近在把主力开发框架从 vue 转化到 react，对 redux 相关比较感兴趣，拉了 redux 的源码看了下，这里做下源码分析，方便有需要的同学取用。
 
 什么是 redux，为什么用 redux，官方文档已经讲的非常清楚，这里就不再赘述。[redux 文档](https://redux.js.org/) 这里主要关注 redux 的 src 部分。核心内容会分以下部分展开。
 
@@ -57,16 +57,31 @@ createStore 是一个工厂函数，生成管理状态树的 store, 接受三个
   先看 createStore 的函数定义，这里用 ts 的函数重载，表示 createStore 函数第一个参数必须是`reducer`, 第二个参数可以是初始化的 store 状态，也可以是中间件增强器，第三个参数必须是中间件增强器(如果有的话)，函数输出是一个 Store 类型。
 
 ```typescript
-export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
+export default function createStore<
+  S,
+  A extends Action,
+  Ext = {},
+  StateExt = never
+>(
   reducer: Reducer<S, A>,
   enhancer?: StoreEnhancer<Ext, StateExt>
 ): Store<ExtendState<S, StateExt>, A, StateExt, Ext> & Ext;
-export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
+export default function createStore<
+  S,
+  A extends Action,
+  Ext = {},
+  StateExt = never
+>(
   reducer: Reducer<S, A>,
   preloadedState?: PreloadedState<S>,
   enhancer?: StoreEnhancer<Ext, StateExt>
 ): Store<ExtendState<S, StateExt>, A, StateExt, Ext> & Ext;
-export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
+export default function createStore<
+  S,
+  A extends Action,
+  Ext = {},
+  StateExt = never
+>(
   reducer: Reducer<S, A>,
   preloadedState?: PreloadedState<S> | StoreEnhancer<Ext, StateExt>,
   enhancer?: StoreEnhancer<Ext, StateExt>
@@ -78,7 +93,12 @@ export default function createStore<S, A extends Action, Ext = {}, StateExt = ne
 以下是 Store 类型的声明
 
 ```ts
-export interface Store<S = any, A extends Action = AnyAction, StateExt = never, Ext = {}> {
+export interface Store<
+  S = any,
+  A extends Action = AnyAction,
+  StateExt = never,
+  Ext = {}
+> {
   // 调度器，唯一可以更改redux状态的入口，为了维护状态的原子性
   dispatch: Dispatch<A>;
   // 获取当前store的状态
@@ -143,11 +163,17 @@ dispatch 函数接受一个 action 作为参数，校验 action，校验成功�
 ```ts
 function dispatch(action: A) {
   if (!isPlainObject(action)) {
-    throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+    throw new Error(
+      'Actions must be plain objects. ' +
+        'Use custom middleware for async actions.'
+    );
   }
 
   if (typeof action.type === 'undefined') {
-    throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+    throw new Error(
+      'Actions may not have an undefined "type" property. ' +
+        'Have you misspelled a constant?'
+    );
   }
 
   if (isDispatching) {
@@ -220,7 +246,7 @@ function subscribe(listener: () => void) {
 
 代码流程图
 
-![](/Users/feiwu/code/github/shan-hai-jing/docs/assets/dispatch.png)
+![](../assets/dispatch.png)
 
 #### subscribe
 
@@ -301,7 +327,13 @@ function replaceReducer<NewState, NewActions extends A>(
   // the new state tree with any relevant data from the old one.
   dispatch({ type: ActionTypes.REPLACE } as A);
   // change the type of the store by casting it to the new store
-  return (store as unknown) as Store<ExtendState<NewState, StateExt>, NewActions, StateExt, Ext> & Ext;
+  return (store as unknown) as Store<
+    ExtendState<NewState, StateExt>,
+    NewActions,
+    StateExt,
+    Ext
+  > &
+    Ext;
 }
 ```
 
@@ -311,7 +343,133 @@ function replaceReducer<NewState, NewActions extends A>(
 
 #### combineReducers 做了什么
 
-combineReducers 的功能是将不同 reducers 聚合成一个大的 reducer，一个最简实现可能如下显示
+combineReducers 的功能是将不同 reducers 聚合成一个大的 reducer。具体其做了以下事情。
 
-```js
+![](../assets/redux/combineReducer.drawio.png)
+
+#### bindActionCreators
+
+`bindActionCreators` 函数接受一个 function 或者一个对象，根据传入值返回对应的内容，其核心功能是将`dispatch`函数绑定到 action
+
+```ts
+function bindActionCreator<A extends AnyAction = AnyAction>(
+  actionCreator: ActionCreator<A>,
+  dispatch: Dispatch
+) {
+  // 将dispatch函数绑定到 actionCreator
+  return function (this: any, ...args: any[]) {
+    return dispatch(actionCreator.apply(this, args));
+  };
+}
+
+export default function bindActionCreators(
+  actionCreators: ActionCreator<any> | ActionCreatorsMapObject,
+  dispatch: Dispatch
+) {
+  // 传入为函数的情况
+  if (typeof actionCreators === 'function') {
+    return bindActionCreator(actionCreators, dispatch);
+  }
+
+  // ...
+
+  // 传入为对象的情况
+  const boundActionCreators: ActionCreatorsMapObject = {};
+  for (const key in actionCreators) {
+    const actionCreator = actionCreators[key];
+    if (typeof actionCreator === 'function') {
+      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+    }
+  }
+  return boundActionCreators;
+}
 ```
+
+#### applyMiddleware
+
+applyMiddleware 接受不限长度的 middleware 中间件，并返回一个函数`enhancer`，`enhancer`主要对 store 的 dispatch 函数进行封装。要看到`enhancer`函数的工作，首先得知道 redux 的中间件是怎么写的。
+
+官方文档描述为
+
+> 每个 middleware 接受 Store 的 dispatch 和 getState 函数作为命名参数，并返回一个函数。该函数会被传入被称为 next 的下一个 middleware 的 dispatch 方法，并返回一个接收 action 的新函数，这个函数可以直接调用 next(action)，或者在其他需要的时刻调用，甚至根本不去调用它。调用链中最后一个 middleware 会接受真实的 store 的 dispatch 方法作为 next 参数，并借此结束调用链。所以，middleware 的函数签名是 ({ getState, dispatch }) => next => action。
+
+redux 中 Middleware ts 定义为
+
+```ts
+export interface MiddlewareAPI<D extends Dispatch = Dispatch, S = any> {
+  dispatch: D;
+  getState(): S;
+}
+
+export interface Middleware<
+  _DispatchExt = {}, // TODO: remove unused component (breaking change)
+  S = any,
+  D extends Dispatch = Dispatch
+> {
+  (api: MiddlewareAPI<D, S>): (
+    next: D
+  ) => (action: D extends Dispatch<infer A> ? A : never) => any;
+}
+```
+
+其中 next 可以理解为后续增强后的 dispatch 函数。applyMiddlewar 实现如下
+
+```ts
+export default function applyMiddleware(
+  ...middlewares: Middleware[]
+): StoreEnhancer<any> {
+  return (createStore: StoreCreator) => <S, A extends AnyAction>(
+    reducer: Reducer<S, A>,
+    ...args: any[]
+  ) => {
+    const store = createStore(reducer, ...args);
+    let dispatch: Dispatch = () => {
+      throw new Error(
+        'Dispatching while constructing your middleware is not allowed. ' +
+          'Other middleware would not be applied to this dispatch.'
+      );
+    };
+
+    // 定义一个 middlewareAPI，将getState 通过curry传入到中间件
+    const middlewareAPI: MiddlewareAPI = {
+      getState: store.getState,
+      dispatch: (action, ...args) => dispatch(action, ...args),
+    };
+    // 通过compose函数将所有中间件串联
+    const chain = middlewares.map((middleware) => middleware(middlewareAPI));
+    dispatch = compose<typeof dispatch>(...chain)(store.dispatch);
+
+    return {
+      ...store,
+      dispatch,
+    };
+  };
+}
+```
+
+#### compose
+
+redux 用 compose 函数将各个中间件以洋葱模型串联起来，代码如下
+![](../assets/redux/onion_modal.png)
+
+```ts
+export default function compose(...funcs: Function[]) {
+  if (funcs.length === 0) {
+    // infer the argument type so it is usable in inference down the line
+    return <T>(arg: T) => arg;
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce((a, b) => (...args: any) => a(b(...args)));
+}
+```
+
+个人觉得 compose 函数是 redux 中最难理解的一块，`compose<typeof dispatch>(...chain)(store.dispatch)` 做的事实际是将各个中间件串联，并将 dispatch 柯里化到中间件中
+
+### 参考
+
+![图解Redux中middleware的洋葱模型](https://juejin.im/post/5adec636518825670b33b7e8)
+![reduce与redux中compose函数](https://www.jianshu.com/p/c9dfe57c4a4e)
