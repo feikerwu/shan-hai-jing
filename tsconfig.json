@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+    "allowSyntheticDefaultImports": true
+  }
+}
