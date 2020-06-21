@@ -54,34 +54,19 @@ createStore 是一个工厂函数，生成管理状态树的 store, 接受三个
 - preloadedState 初始化状态
 - enhancer 使用 applyMiddleware 返回的中间件增强
 
-  先看 createStore 的函数定义，这里用 ts 的函数重载，表示createStore函数第一个参数必须是`reducer`, 第二个参数可以是初始化的store状态，也可以是中间件增强器，第三个参数必须是中间件增强器(如果有的话)，函数输出是一个Store类型。
+  先看 createStore 的函数定义，这里用 ts 的函数重载，表示 createStore 函数第一个参数必须是`reducer`, 第二个参数可以是初始化的 store 状态，也可以是中间件增强器，第三个参数必须是中间件增强器(如果有的话)，函数输出是一个 Store 类型。
 
 ```typescript
-export default function createStore<
-  S,
-  A extends Action,
-  Ext = {},
-  StateExt = never
->(
+export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
   reducer: Reducer<S, A>,
   enhancer?: StoreEnhancer<Ext, StateExt>
 ): Store<ExtendState<S, StateExt>, A, StateExt, Ext> & Ext;
-export default function createStore<
-  S,
-  A extends Action,
-  Ext = {},
-  StateExt = never
->(
+export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
   reducer: Reducer<S, A>,
   preloadedState?: PreloadedState<S>,
   enhancer?: StoreEnhancer<Ext, StateExt>
 ): Store<ExtendState<S, StateExt>, A, StateExt, Ext> & Ext;
-export default function createStore<
-  S,
-  A extends Action,
-  Ext = {},
-  StateExt = never
->(
+export default function createStore<S, A extends Action, Ext = {}, StateExt = never>(
   reducer: Reducer<S, A>,
   preloadedState?: PreloadedState<S> | StoreEnhancer<Ext, StateExt>,
   enhancer?: StoreEnhancer<Ext, StateExt>
@@ -90,117 +75,147 @@ export default function createStore<
 }
 ```
 
-以下是Store类型的声明
+以下是 Store 类型的声明
 
 ```ts
-export interface Store<
-  S = any,
-  A extends Action = AnyAction,
-  StateExt = never,
-  Ext = {}
-> {
+export interface Store<S = any, A extends Action = AnyAction, StateExt = never, Ext = {}> {
   // 调度器，唯一可以更改redux状态的入口，为了维护状态的原子性
-  dispatch: Dispatch<A>
+  dispatch: Dispatch<A>;
   // 获取当前store的状态
-  getState(): S
+  getState(): S;
   // 订阅状态改变
-  subscribe(listener: () => void): Unsubscribe
+  subscribe(listener: () => void): Unsubscribe;
   // 更新reducers，可以用与做热更新或者分包
   replaceReducer<NewState, NewActions extends Action>(
     nextReducer: Reducer<NewState, NewActions>
-  ): Store<ExtendState<NewState, StateExt>, NewActions, StateExt, Ext> & Ext
+  ): Store<ExtendState<NewState, StateExt>, NewActions, StateExt, Ext> & Ext;
 
- 
-  [Symbol.observable](): Observable<S>
+  [Symbol.observable](): Observable<S>;
 }
-
 ```
 
-这里我画了一个简单的流程图看看Store是干什么的
+这里我画了一个简单的流程图看看 Store 是干什么的
 
 ![](/Users/feiwu/code/github/shan-hai-jing/docs/assets/redux store.png)
 
-看了Store的定义知道Store是干什么的，现在可以进入到createStore内部看看Store是怎么实现的。
+看了 Store 的定义知道 Store 是干什么的，现在可以进入到 createStore 内部看看 Store 是怎么实现的。
 
-createStore内部定义了currentReducer, currentState, currentListeners 表示当前Store的reducer，状态以及监听函数，用isDispatching来加解锁保证状态的唯一性。其中的currentListener比较难理解，这里先略过。
+createStore 内部定义了 currentReducer, currentState, currentListeners 表示当前 Store 的 reducer，状态以及监听函数，用 isDispatching 来加解锁保证状态的唯一性。其中的 currentListener 比较难理解，这里先略过。
 
 ```ts
-let currentReducer = reducer
-let currentState = preloadedState as S
-let currentListeners: (() => void)[] | null = []
-let nextListeners = currentListeners
-let isDispatching = false
-
+let currentReducer = reducer;
+let currentState = preloadedState as S;
+let currentListeners: (() => void)[] | null = [];
+let nextListeners = currentListeners;
+let isDispatching = false;
 ```
-
-
 
 ##### getState
 
-getState没有什么好解读的，就是在Store被锁住的时候访问报错，否则返回currentState
+getState 没有什么好解读的，就是在 Store 被锁住的时候访问报错，否则返回 currentState
 
 ```typescript
- /**
-   * Reads the state tree managed by the store.
-   *
-   * @returns The current state tree of your application.
-   */
-  function getState(): S {
-    if (isDispatching) {
-      throw new Error(
-        'You may not call store.getState() while the reducer is executing. ' +
-          'The reducer has already received the state as an argument. ' +
-          'Pass it down from the top reducer instead of reading it from the store.'
-      )
-    }
-
-    return currentState as S
+/**
+ * Reads the state tree managed by the store.
+ *
+ * @returns The current state tree of your application.
+ */
+function getState(): S {
+  if (isDispatching) {
+    throw new Error(
+      'You may not call store.getState() while the reducer is executing. ' +
+        'The reducer has already received the state as an argument. ' +
+        'Pass it down from the top reducer instead of reading it from the store.'
+    );
   }
+
+  return currentState as S;
+}
 ```
-
-
 
 ##### dispatch
 
-dispatch 函数接受一个action作为参数，校验action，校验成功后，将当前状态和action传入到reducer中生成下一个状态，并执行监听函数。其中action校验条件有
+dispatch 函数接受一个 action 作为参数，校验 action，校验成功后，将当前状态和 action 传入到 reducer 中生成下一个状态，并执行监听函数。其中 action 校验条件有
 
-+ action必须是一个简单对象
-+ action必须有一个叫做type的key，且值非空
+- action 必须是一个简单对象
+- action 必须有一个叫做 type 的 key，且值非空
 
 ```ts
 function dispatch(action: A) {
   if (!isPlainObject(action)) {
-    throw new Error(
-      'Actions must be plain objects. ' +
-      'Use custom middleware for async actions.'
-    )
+    throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
   }
 
   if (typeof action.type === 'undefined') {
-    throw new Error(
-      'Actions may not have an undefined "type" property. ' +
-      'Have you misspelled a constant?'
-    )
+    throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
   }
 
   if (isDispatching) {
-    throw new Error('Reducers may not dispatch actions.')
+    throw new Error('Reducers may not dispatch actions.');
   }
 
   try {
-    isDispatching = true
-    currentState = currentReducer(currentState, action)
+    isDispatching = true;
+    currentState = currentReducer(currentState, action);
   } finally {
-    isDispatching = false
+    isDispatching = false;
   }
 
-  const listeners = (currentListeners = nextListeners)
+  const listeners = (currentListeners = nextListeners);
   for (let i = 0; i < listeners.length; i++) {
-    const listener = listeners[i]
-    listener()
+    const listener = listeners[i];
+    listener();
   }
 
-  return action
+  return action;
 }
 ```
 
+dispatch 的整体流程图如下
+![](../assets/dispatch.png)
+
+##### subscribe
+
+```ts
+function subscribe(listener: () => void) {
+  if (typeof listener !== 'function') {
+    throw new Error('Expected the listener to be a function.');
+  }
+
+  if (isDispatching) {
+    throw new Error(
+      'You may not call store.subscribe() while the reducer is executing. ' +
+        'If you would like to be notified after the store has been updated, subscribe from a ' +
+        'component and invoke store.getState() in the callback to access the latest state. ' +
+        'See https://redux.js.org/api/store#subscribelistener for more details.'
+    );
+  }
+
+  let isSubscribed = true;
+
+  ensureCanMutateNextListeners();
+  nextListeners.push(listener);
+
+  return function unsubscribe() {
+    if (!isSubscribed) {
+      return;
+    }
+
+    if (isDispatching) {
+      throw new Error(
+        'You may not unsubscribe from a store listener while the reducer is executing. ' +
+          'See https://redux.js.org/api/store#subscribelistener for more details.'
+      );
+    }
+
+    isSubscribed = false;
+
+    ensureCanMutateNextListeners();
+    const index = nextListeners.indexOf(listener);
+    nextListeners.splice(index, 1);
+    currentListeners = null;
+  };
+}
+```
+
+subscribe 函数监听一个 listener，并返回一个 unsubscribe 函数用去取消监听，其中需要注意的是`ensureCanMutateNextListeners` 函数
