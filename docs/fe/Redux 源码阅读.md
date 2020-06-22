@@ -2,7 +2,7 @@
 
 最近在把主力开发框架从 vue 转化到 react，对 redux 相关比较感兴趣，拉了 redux 的源码看了下，这里做下源码分析，方便有需要的同学取用。
 
-什么是 redux，为什么用 redux，官方文档已经讲的非常清楚，这里就不再赘述。[redux 文档](https://redux.js.org/) 这里主要关注 redux 的 src 部分。核心内容会分以下部分展开。
+什么是 redux，为什么用 redux，[官方文档](https://redux.js.org/)已经讲的非常清楚，这里就不再赘述。 这里主要关注 redux 的 src 部分。核心内容会分以下部分展开。
 
 - createStore 做了什么
 - combineReducers 做了什么
@@ -50,9 +50,9 @@ src
 
 createStore 是一个工厂函数，生成管理状态树的 store, 接受三个参数，分别是
 
-- reducer 根据 action 生成下一个状态
-- preloadedState 初始化状态
-- enhancer 使用 applyMiddleware 返回的中间件增强
+- **reducer**: 根据 action 生成下一个状态
+- **preloadedState**: 初始化状态
+- **enhancer**: 使用 applyMiddleware 返回的中间件增强
 
   先看 createStore 的函数定义，这里用 ts 的函数重载，表示 createStore 函数第一个参数必须是`reducer`, 第二个参数可以是初始化的 store 状态，也可以是中间件增强器，第三个参数必须是中间件增强器(如果有的话)，函数输出是一个 Store 类型。
 
@@ -116,7 +116,7 @@ export interface Store<
 
 这里我画了一个简单的流程图看看 Store 是干什么的
 
-![](/Users/feiwu/code/github/shan-hai-jing/docs/assets/redux store.png)
+![](../assets/redux/redux_store.png)
 
 看了 Store 的定义知道 Store 是干什么的，现在可以进入到 createStore 内部看看 Store 是怎么实现的。
 
@@ -198,7 +198,7 @@ function dispatch(action: A) {
 ```
 
 dispatch 的整体流程图如下
-![](../assets/dispatch.png)
+![](../assets/redux/dispatch.png)
 
 ##### subscribe
 
@@ -243,10 +243,6 @@ function subscribe(listener: () => void) {
   };
 }
 ```
-
-代码流程图
-
-![](../assets/dispatch.png)
 
 #### subscribe
 
@@ -467,9 +463,19 @@ export default function compose(...funcs: Function[]) {
 }
 ```
 
-个人觉得 compose 函数是 redux 中最难理解的一块，`compose<typeof dispatch>(...chain)(store.dispatch)` 做的事实际是将各个中间件串联，并将 dispatch 柯里化到中间件中
+compose 函数应该是 redux 中最难理解的一块，`compose<typeof dispatch>(...chain)(store.dispatch)` 做的事实际是将各个中间件串联，并将 dispatch 柯里化到中间件内部。
+
+### 总结
+
+**Redux 试图让 state 的变化变得可预测**，为了做到这一点，redux 做了以下这些事
+
+1. 全局只存在一个 store，state 存在 store 中
+2. state 只能通过 action 改变，也就是说每次 state 的改变源头都是确定的
+3. reducers 必须是纯函数，即在相同的输入值时，需产生相同的输出，当 action 确定时，reducers 输出的 state 也是确定的
+4. 订阅 state 变化的 listener 每次被执行的都是当前快照，这样做的目的是为避免 listener 引入新的不确定性。
 
 ### 参考
 
-![图解Redux中middleware的洋葱模型](https://juejin.im/post/5adec636518825670b33b7e8)
-![reduce与redux中compose函数](https://www.jianshu.com/p/c9dfe57c4a4e)
+[图解 Redux 中 middleware 的洋葱模型](https://juejin.im/post/5adec636518825670b33b7e8)
+
+[reduce 与 redux 中 compose 函数](https://www.jianshu.com/p/c9dfe57c4a4e)
