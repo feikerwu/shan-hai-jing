@@ -3,6 +3,7 @@
 - [redux 源码阅读](./docs/fe/Redux源码阅读.md)
 - [安全问题](./docs/note/安全问题.md)
 - [软链和 npm-link](./docs/note/软链.md)
+- [React 的 Fiber 架构](./docs/fe/fiber.md)
 
 ## 算法
 
