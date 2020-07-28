@@ -6,6 +6,7 @@
 - [软链和 npm-link](./docs/note/软链.md)
 - [实现一个并行调用Promise的调度器](./docs/note/实现一个带并发限制的promise调度器.md)
 - [React 的 Fiber 架构](./docs/fe/fiber.md)
+- [v8: 如何做内存管理](https://github.com/feikerwu/shan-hai-jing/issues/6)
 
 ## 算法
 
