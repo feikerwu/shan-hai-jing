@@ -11,6 +11,9 @@
 
 ## 算法
 
+- [leetcode题解](./docs/algorithm/README.md)
+
 - [最长递增子序列](./docs/algorithm/最长递增子序列.md)
 - [最长重复子数组](./docs/algorithm/最长重复子数组.md)
 - [RK&KMP](./docs/algorithm/字符串匹配.md)
+
