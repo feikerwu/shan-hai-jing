@@ -15,7 +15,7 @@ async function dirFileToReadme(path: string) {
     );
     res.push(entry);
   }
-  res = res.sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1)));
+  res = res.sort((a, b) => parseInt(a.substring(4)) - parseInt(b.substring(4)));
   res.unshift(`## ${path.substring(2)}\n`);
 
   return res.join('');
