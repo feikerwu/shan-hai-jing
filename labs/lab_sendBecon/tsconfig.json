@@ -1,0 +1,10 @@
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "dist"
+  }
+}
