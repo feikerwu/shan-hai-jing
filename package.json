@@ -16,6 +16,7 @@
     "@babel/parser": "^7.10.4",
     "@wessberg/cjs-to-esm-transformer": "0.0.20",
     "babel-plugin-transform-commonjs": "^1.1.6",
-    "class-validator": "file:../class-validator"
+    "class-validator": "file:../class-validator",
+    "reflect-metadata": "^0.1.13"
   }
 }
