@@ -7,6 +7,8 @@
 - [React 的 Fiber 架构](./docs/fe/fiber.md)
 - [v8: 如何做内存管理](https://github.com/feikerwu/shan-hai-jing/issues/6)
 - [深入理解 git](https://github.com/feikerwu/shan-hai-jing/issues/7)
+- [如何用 ts 优雅实现 IoC&DI](./docs/note/nestjs如何实现依赖注入.md)
+- [IoC&DI](./docs/design/IOC&DI.md)
 
 ## 算法
 
