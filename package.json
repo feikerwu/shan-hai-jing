@@ -6,9 +6,12 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.1",
     "@vuepress/plugin-nprogress": "^1.5.1",
-    "vuepress": "^1.5.1"
+    "vuepress": "^1.6.0",
+    "vuepress-theme-book": "^0.0.4"
   },
   "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "gen-lc": "ts-node scripts/gen-leetcode-readme.ts"
   },
   "dependencies": {

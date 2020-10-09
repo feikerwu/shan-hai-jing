@@ -10,7 +10,8 @@
 print 'hello world'
 ```
 
-主旨思想是在 node 内启动一个子进程用于解析 python, 实现如下，如果严谨一点还可以通过 node 先去安装 python 然后再执行脚本
+主旨思想是在 node 内启动一个子进程用于解析 python, 实现如下，如果严谨一点还可以
+通过 node 先去安装 python 然后再执行脚本
 
 ```ts
 import { spawn } from 'child_process'
