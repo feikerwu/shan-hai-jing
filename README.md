@@ -10,6 +10,7 @@
 - [如何用 ts 优雅实现 IoC&DI](./docs/note/nestjs如何实现依赖注入.md)
 - [IoC&DI](./docs/design/IOC&DI.md)
 - [用户行为轨迹回放](./docs/note/用户行为轨迹回放.md)
+- [node CLS 全链路追踪以及其实现原理](./docs/note/node%20CLS%20全链路追踪以及其实现原理.md)
 
 ## 算法
 
