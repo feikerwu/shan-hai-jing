@@ -1,3 +1,4 @@
+#! https://zhuanlan.zhihu.com/p/265872612
 # 如何拦截node的require
 
 都说知其然而知其所以然，require是我们做node开发接触最多的一个函数，了解require的原理有助对node模块系统的理解，还可以打出很多骚操作。
