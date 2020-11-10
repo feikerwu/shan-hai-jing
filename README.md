@@ -12,6 +12,7 @@
 - [用户行为轨迹回放](./docs/note/用户行为轨迹回放.md)
 - [node CLS 全链路追踪以及其实现原理](./docs/note/node%20CLS%20全链路追踪以及其实现原理.md)
 - [如何拦截require](./docs/note/如何拦截node的require.md)
+- [如何实现命令行的简易进度条](./docs/note/如何实现命令行的简易进度条.md)
 
 ## 算法
 

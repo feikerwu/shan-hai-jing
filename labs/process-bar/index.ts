@@ -1,12 +1,13 @@
-const prefix = '[';
-const postfix = ']';
-const MAX_CHARS = 100;
+const MAX_CHARS = 40;
 
 function render(precent: number) {
   const arrowNumber = ~~(MAX_CHARS * precent);
-  const bar = '>'.repeat(arrowNumber) + ' '.repeat(MAX_CHARS - arrowNumber);
-  const curProcessbar = `${prefix}${bar}${postfix}`;
-  console.log('\x1bc');
+  const bar =
+    '\x1b[31m' +
+    '▓'.repeat(arrowNumber) +
+    '\x1b[34m' +
+    '░'.repeat(MAX_CHARS - arrowNumber);
+  const curProcessbar = `\x1b[1A\x1b[2K${bar} ${Math.floor(precent * 100)}%`;
   console.log(curProcessbar);
 }
 
@@ -14,7 +15,8 @@ let cur = 0;
 const timer = setInterval(() => {
   if (cur >= 100) {
     clearInterval(timer);
+    return;
   }
   cur++;
   render(cur / 100);
-}, 100);
+}, 16);
