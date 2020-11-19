@@ -20,10 +20,8 @@
   "dependencies": {
     "@babel/core": "^7.10.4",
     "@babel/parser": "^7.10.4",
-    "@wessberg/cjs-to-esm-transformer": "0.0.20",
     "babel-plugin-transform-commonjs": "^1.1.6",
     "class-validator": "file:../class-validator",
-    "figlet": "^1.5.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.3"
   }
 }
