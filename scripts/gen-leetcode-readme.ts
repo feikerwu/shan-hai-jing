@@ -37,3 +37,5 @@ function getMarkdownLinkEntry(name: string, link: string) {
 }
 
 getReadme();
+
+let a: Iterable;
