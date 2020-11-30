@@ -1,4 +1,9 @@
-## webpack hash 生成
+---
+title: webpack hash 实现以及nginx的hash实现对比
+date: 2020-08-06
+description: webpack hash实现以及nginx的hash实现对比
+---
+
 
 webpack 使用 node 的 `crypto` 包生成对应的文件的签名, [源码](https://github.com/webpack/webpack/blob/master/lib/util/createHash.js), 只对文件内容 hash，文件修改时间发生变化，而内容不变，则生成的文件摘要也无变化。
 

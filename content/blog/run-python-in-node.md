@@ -1,4 +1,8 @@
-# 如何在 nodejs 内解析其它脚本
+---
+title: 如何在 nodejs 内解析其它脚本
+date: 2020-07-08
+description: 原题,启动一个 Node Server，通过这个 Server 访问一个 php 文件，怎么输出运行解析 php 后的结果？
+---
 
 原题: 启动一个 Node Server，通过这个 Server 访问一个 php 文件，怎么输出运行解析 php 后的结果？
 

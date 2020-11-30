@@ -1,5 +1,10 @@
+---
+title: nest 中 IoC & DI 的实现
+date: 2020-07-05
+description: 探究nest中IoC的实现原理
+---
 nest 是一款构建高效，可扩展的 Node.js 服务器端应用程序的框架。
-nest 里高度使用了控制反转([IoC](../design/IOC&DI.md))的设计思想。for example
+nest 里高度使用了控制反转IoC的设计思想。for example
 
 ```ts
 import { Injectable } from '@nestjs/common'

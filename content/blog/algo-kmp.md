@@ -1,3 +1,9 @@
+---
+title: 字符串匹配
+date: 2020-05-05
+description: RK 算法 & KMP
+---
+
 # 字符串匹配
 
 字符串搜索算法（String searching algorithms）又称字符串比对算法（string matching algorithms）是一种搜索算法，是字符串算法中的一类，用以试图在一长字符串或文章中，找出其是否包含某一个或多个字符串，以及其位置。

@@ -1,3 +1,9 @@
+---
+title: linux 软链
+date: 2020-05-05
+description: linux 的软链接硬链接实验
+---
+
 ## linux 软链
 
 ### linux 硬链接和软链接

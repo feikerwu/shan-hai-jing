@@ -1,3 +1,9 @@
+---
+title: 最长上升子序列
+date: 2020-05-06
+description: 最长上升子序列leetcode类型题
+---
+
 | [300.最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/description/) |      |      |
 | ------------------------------------------------------------ | ---- | ---- |
 | [435.无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/description/) |      |      |
