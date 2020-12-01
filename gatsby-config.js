@@ -5,7 +5,7 @@ module.exports = {
       name: `feiker`,
       summary: `少年起而行之`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `个人博客/笔记, 大杂烩, 故谓之山海经`,
     siteUrl: `https://github.com/feiker`,
     social: {
       twitter: ``,
@@ -27,6 +27,9 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-mdx`,
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
@@ -42,9 +45,10 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
+          `gatsby-remark-autolink-headers`,
+          `gatsby-remark-prismjs`,
         ],
       },
     },
@@ -60,8 +64,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `feiker'w blog`,
+        short_name: `feiker`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,

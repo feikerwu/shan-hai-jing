@@ -5,9 +5,10 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import Image from 'gatsby-image';
+import svgGithub from '../assets/icons/logo-github.svg';
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -31,21 +32,21 @@ const Bio = () => {
         }
       }
     }
-  `)
+  `);
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
-  const author = data.site.siteMetadata?.author
+  const author = data.site.siteMetadata?.author;
   // const social = data.site.siteMetadata?.social
 
-  const avatar = data?.avatar?.childImageSharp?.fixed
+  const avatar = data?.avatar?.childImageSharp?.fixed;
 
   return (
-    <div className="bio">
+    <div className='bio'>
       {avatar && (
         <Image
           fixed={avatar}
           alt={author?.name || ``}
-          className="bio-avatar"
+          className='bio-avatar'
           imgStyle={{
             borderRadius: `50%`,
           }}
@@ -55,14 +56,15 @@ const Bio = () => {
         <p>
           <strong>{author.name}</strong> {author?.summary || null}
           {` `}
-          <div></div>
-          <a href={`https://github.com/feikerwu/shan-hai-jing`}>
-            <img src={require('../assets/icons/logo-github.svg')} className={svg-logo} />
-          </a>
         </p>
       )}
+      <div className={'social-links'}>
+        <a href={`https://github.com/feikerwu/shan-hai-jing`}>
+          <img src={svgGithub} alt='' className={'svg-logo'} />
+        </a>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;

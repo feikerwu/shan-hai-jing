@@ -169,8 +169,8 @@ rrweb 并不是对每帧或者每几帧生成一次快照，这里有点 git 的
 
 ```js
 {
-  type: EventType
-  timeStamp: number
+  type: EventType;
+  timeStamp: number;
   data: {
   }
 }

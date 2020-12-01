@@ -1,5 +1,7 @@
 ## 山海经
 
+<img src="./src/assets/xuan-gui.jpeg" style="width: 100%" />
+
 ### react
 + [redux 源码浅析](./content/blog/redux-source-code/index.md)
 + [fiber](./content/blog/fiber.md)

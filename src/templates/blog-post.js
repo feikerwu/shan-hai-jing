@@ -4,18 +4,24 @@ import { Link, graphql } from 'gatsby';
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import TOC from '../components/TOC';
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next } = data;
-
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
+      <TOC
+        headings={post.headings.map(heading => ({
+          ...heading,
+          url: `${post.fields.slug}#${heading.id}`,
+        }))}
+      ></TOC>
       <article
         className='blog-post'
         itemScope
@@ -29,6 +35,12 @@ const BlogPostTemplate = ({ data, location }) => {
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp='articleBody'
         />
+
+        <nav
+          className={'custom-class'}
+          dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
+        ></nav>
+
         <hr />
         <footer>
           <Bio />
@@ -78,9 +90,18 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(id: { eq: $id }) {
+      fields {
+        slug
+      }
       id
       excerpt(pruneLength: 160)
       html
+      tableOfContents(absolute: false)
+      headings {
+        depth
+        value
+        id
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

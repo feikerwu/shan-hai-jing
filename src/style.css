@@ -247,7 +247,7 @@ a:focus {
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
-  margin-bottom: var(--spacing-20);
+  margin-bottom: var(--spacing-8);
 }
 
 .global-header {
@@ -287,8 +287,8 @@ a:focus {
 }
 
 .bio {
-  display: flex;
-  margin-bottom: var(--spacing-16);
+  /* display: flex; */
+  margin-bottom: var(--spacing-6);
 }
 
 .bio p {
@@ -334,4 +334,19 @@ a:focus {
 
 img {
   max-width: 100%;
+}
+
+.social-links {
+  margin-top: var(--spacing-5);
+}
+
+.svg-logo {
+  width: var(--spacing-6);
+}
+
+.custom-class {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
 }
