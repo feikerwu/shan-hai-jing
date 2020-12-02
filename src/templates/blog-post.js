@@ -36,11 +36,6 @@ const BlogPostTemplate = ({ data, location }) => {
           itemProp='articleBody'
         />
 
-        <nav
-          className={'custom-class'}
-          dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
-        ></nav>
-
         <hr />
         <footer>
           <Bio />
