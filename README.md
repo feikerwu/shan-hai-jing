@@ -27,3 +27,4 @@
 + [深入理解git](./content/blog/deep-in-git.md)
 + [前端安全](./content/blog/fe-security.md)
 + [如何实现一个并发的任务管理器](./content/blog/concurrent-promise.md)
++ [如何实现锚点定位双向更新](./content/blog/toc.md)

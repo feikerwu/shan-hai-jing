@@ -351,3 +351,7 @@ img {
   right: 0;
   width: 200px;
 }
+
+.token-operator {
+  background: none !important;
+}
