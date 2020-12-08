@@ -28,3 +28,4 @@
 + [前端安全](./content/blog/fe-security.md)
 + [如何实现一个并发的任务管理器](./content/blog/concurrent-promise.md)
 + [如何实现锚点定位双向更新](./content/blog/toc.md)
++ [记一次 http 缓存锁的探索](./content/blog/cache-lock.md)
