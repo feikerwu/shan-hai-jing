@@ -343,6 +343,7 @@ img {
 
 .svg-logo {
   width: var(--spacing-6);
+  margin-right: var(--spacing-6);
 }
 
 .custom-class {

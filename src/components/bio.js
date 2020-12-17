@@ -9,6 +9,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import svgGithub from '../assets/icons/logo-github.svg';
+import svgFriend from '../assets/icons/icon-friend-link.svg';
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -61,6 +62,10 @@ const Bio = () => {
       <div className={'social-links'}>
         <a href={`https://github.com/feikerwu/shan-hai-jing`}>
           <img src={svgGithub} alt='' className={'svg-logo'} />
+        </a>
+
+        <a href={'/friends'}>
+          <img src={svgFriend} alt='' className={'svg-logo'} />
         </a>
       </div>
     </div>
