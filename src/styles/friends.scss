@@ -1,0 +1,21 @@
+@import '@/assets/scss/const.scss';
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.friends-list {
+  max-width: $page-width;
+}
+
+.friend {
+  @extend .flex;
+  .avatar {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    margin-right: 3em;
+  }
+}

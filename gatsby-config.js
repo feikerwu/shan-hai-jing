@@ -62,6 +62,16 @@ module.exports = {
     `gatsby-plugin-feed`,
     `gatsby-plugin-sass`,
     {
+      resolve: `gatsby-plugin-less`,
+      options: {
+        modifyVars: {
+          '@pageWidth': '42rem',
+          '@primary': '#8a4baf',
+          '@fontFamily-sans': `"Merriweather", "Georgia", Cambria, "Times New Roman"`,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `feiker'w blog`,
