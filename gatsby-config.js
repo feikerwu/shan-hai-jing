@@ -53,12 +53,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `G-LZLMLK3Q0Jyd`,
-    //   },
-    // },
     `gatsby-plugin-feed`,
     `gatsby-plugin-sass`,
     {
@@ -94,8 +88,13 @@ module.exports = {
         extensions: [],
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          'G-DCBXTW79ZL', // Google Analytics / GA
+        ],
+      },
+    },
   ],
 };

@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "shan-hai-jing",
   "private": true,
   "description": "shan-hai-jing",
   "version": "0.1.0",
@@ -11,9 +11,9 @@
     "gatsby": "^2.26.1",
     "gatsby-image": "^2.5.0",
     "gatsby-plugin-alias-imports": "^1.0.5",
-    "gatsby-plugin-baidu-tongji": "^2.0.0",
     "gatsby-plugin-feed": "^2.7.0",
     "gatsby-plugin-google-analytics": "^2.5.0",
+    "gatsby-plugin-google-gtag": "^2.5.0",
     "gatsby-plugin-manifest": "^2.6.1",
     "gatsby-plugin-offline": "^3.4.0",
     "gatsby-plugin-react-helmet": "^3.4.0",
