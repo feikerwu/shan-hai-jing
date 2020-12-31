@@ -5,7 +5,7 @@ import style from './index.module.scss';
 function scrollTo(id: string) {
   document
     .getElementById(id)
-    .scrollIntoView({ inline: 'nearest', behavior: 'smooth' });
+    ?.scrollIntoView({ inline: 'nearest', behavior: 'smooth' });
 }
 
 const TOC = ({ headings }) => {

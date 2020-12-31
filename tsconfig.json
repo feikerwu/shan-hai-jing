@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom"
+    ],
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@": ["./src/"],
+      "@hooks": ["./src/hooks"],
+    },
+    "noImplicitAny": false,
+  }
+}
