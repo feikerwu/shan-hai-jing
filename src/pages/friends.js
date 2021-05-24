@@ -32,7 +32,7 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={title}>
       <div className='friends-list'>
-        {links.map(item => (
+        {links.map((item) => (
           <FriendLinkItem
             key={item.avatar}
             link={item.link}
