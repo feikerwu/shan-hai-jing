@@ -32,17 +32,19 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75"
-  },
-  "devDependencies": {
+    "typeface-montserrat": "0.0.75",
     "gatsby-plugin-less": "^4.4.0",
-    "gatsby-plugin-mdx": "^1.5.0",
+    "gatsby-plugin-mdx": "^1.0.1",
     "gatsby-plugin-sass": "^2.7.0",
-    "gh-pages": "^3.1.0",
     "less": "^3.13.0",
-    "node-sass": "^4.14.1",
     "prettier": "2.1.2"
   },
+
+  "devDependencies": {
+    "gh-pages": "^3.1.0",
+    "node-sass": "^4.14.1"
+  },
+  
   "homepage": "https://github.com/feikerwu/shan-hai-jing#readme",
   "keywords": [
     "gatsby",
