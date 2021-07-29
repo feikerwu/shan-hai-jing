@@ -6,3 +6,4 @@
 .cache
 **/public/*
 /public/
+node_modules
