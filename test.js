@@ -1,26 +1,30 @@
 /**
- * @param {string} text1
- * @param {string} text2
+ * @param {number[]} nums
  * @return {number}
  */
-var longestCommonSubsequence = function(text1, text2) {
-  let dp = Array.from({length: text1.length + 1})
-  .map(_ => Array.from({length: text2.length + 1}).fill(0))
+var lengthOfLIS = function(nums) {
+  return LCS(nums.slice(), nums.sort((a, b) => a - b))
+};
 
-  for (var i = 1; i <= text1.length; i++) {
-    for (let j = 1; j <= text2.length; j++) {
+function LCS(text1, text2) {
+  let [m, n] = [text1.length, text2.length];
+  let dp = new DoubleArray(m + 1, n + 1);
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
       if (text1[i - 1] === text2[j - 1]) {
         dp[i][j] = dp[i - 1][j - 1] + 1
       } else {
-        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+        dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j])
       }
     }
   }
+  return dp[m][n]
+}
 
-  // console.log(dp)
+class DoubleArray {
+  constructor(m, n) {
+    return Array.from({length: m}).map(_ => Array.from({length: n}).fill(0))
+  }
+}
 
-  return dp[text1.length][text2.length]
-};
-
-// console.log(longestCommonSubsequence("abc",
-// "def"))
+console.log(lengthOfLIS([10,9,2,5,3,7,101,18]))
