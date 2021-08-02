@@ -17,6 +17,14 @@ function LCS(text1, text2) {
         dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j])
       }
     }
+
+    return start
+  }
+
+  let arr = [];
+  for (let col of mat) {
+    let count = find(col)
+    arr.push(count);
   }
   return dp[m][n]
 }
