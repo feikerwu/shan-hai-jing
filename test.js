@@ -1,38 +1,34 @@
 /**
- * @param {number[]} nums
+ * @param {number[][]} graph
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
-  return LCS(nums.slice(), nums.sort((a, b) => a - b))
-};
+var shortestPathLength = function (graph) {
+  const n = graph.length,
+    queue = [];
+  let visited = Array.from({ length: n }).map(_ => new Set());
 
-function LCS(text1, text2) {
-  let [m, n] = [text1.length, text2.length];
-  let dp = new DoubleArray(m + 1, n + 1);
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      if (text1[i - 1] === text2[j - 1]) {
-        dp[i][j] = dp[i - 1][j - 1] + 1
-      } else {
-        dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j])
+  for (let i = 0; i < n; i++) {
+    queue.push([i, 1 << i, 1]);
+    visited[i].add(1 << i);
+  }
+
+  while (queue.length) {
+    let [node, route, dist] = queue.shift();
+    for (let next of graph[node]) {
+      let nextRoute = route | (1 << next);
+
+      if (nextRoute === (1 << n) - 1) {
+        return dist;
+      }
+
+      if (!visited[next].has(nextRoute)) {
+        queue.push([next, nextRoute, dist + 1]);
+        visited[next].add(nextRoute);
       }
     }
-
-    return start
   }
 
-  let arr = [];
-  for (let col of mat) {
-    let count = find(col)
-    arr.push(count);
-  }
-  return dp[m][n]
-}
+  return 0;
+};
 
-class DoubleArray {
-  constructor(m, n) {
-    return Array.from({length: m}).map(_ => Array.from({length: n}).fill(0))
-  }
-}
-
-console.log(lengthOfLIS([10,9,2,5,3,7,101,18]))
+console.log(shortestPathLength([[1, 2, 3], [0], [0], [0]]));
