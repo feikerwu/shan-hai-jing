@@ -1,34 +1,31 @@
 /**
- * @param {number[][]} graph
+ * @param {number[]} nums
  * @return {number}
  */
-var shortestPathLength = function (graph) {
-  const n = graph.length,
-    queue = [];
-  let visited = Array.from({ length: n }).map(_ => new Set());
+var numberOfArithmeticSlices = function (nums) {
+  let { length: len } = nums;
+  const mapArr = Array.from(nums);
 
-  for (let i = 0; i < n; i++) {
-    queue.push([i, 1 << i, 1]);
-    visited[i].add(1 << i);
+  for (let i = 0; i < len; i++) {
+    let curMap = new Map();
+    for (let j = 0; j < i; j++) {
+      let d = nums[i] - nums[j];
+      const preMap = mapArr[j];
+      let curCount = curMap.get(d) || 0;
+      curCount = 1 + curCount + (preMap.get(d) || 0);
+      curMap.set(d, curCount);
+    }
+    mapArr[i] = curMap;
   }
 
-  while (queue.length) {
-    let [node, route, dist] = queue.shift();
-    for (let next of graph[node]) {
-      let nextRoute = route | (1 << next);
-
-      if (nextRoute === (1 << n) - 1) {
-        return dist;
-      }
-
-      if (!visited[next].has(nextRoute)) {
-        queue.push([next, nextRoute, dist + 1]);
-        visited[next].add(nextRoute);
-      }
+  let total = 0;
+  for (let map of mapArr) {
+    for (let [k, v] of map) {
+      total += v;
     }
   }
 
-  return 0;
+  return total - (len * (len - 1)) / 2;
 };
 
-console.log(shortestPathLength([[1, 2, 3], [0], [0], [0]]));
+console.log(numberOfArithmeticSlices([2, 4, 6, 8, 10]));
