@@ -1,34 +1,19 @@
 /**
- * @param {string} s
+ * @param {string} S
  * @return {string}
  */
-var reverseVowels = function (s) {
-  s = s.split('');
-
-  let vowels = new Set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
-
-  let start = 0,
-    end = s.length - 1;
-
-  while (start < end) {
-    while (start < end && !vowels.has(s[start])) {
-      start++;
+var compressString = function (S) {
+  let newStr = '';
+  for (let i = 0; i < S.length; i++) {
+    let preChar = S[i],
+      count = 1;
+    while (S[i + 1] === preChar && i < S.length) {
+      count++;
+      i++;
     }
-
-    while (start < end && !vowels.has(s[end])) {
-      end--;
-    }
-
-    swap(s, start++, end--);
+    newStr += `${preChar}${count}`;
   }
-
-  return s.join('');
+  return newStr.length >= S.length ? S : newStr;
 };
 
-function swap(s, a, b) {
-  let term = s[a];
-  s[a] = s[b];
-  s[b] = term;
-}
-
-console.log(reverseVowels('hello'));
+console.log(compressString('aabcccccaaa'));
