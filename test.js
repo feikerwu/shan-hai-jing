@@ -1,28 +1,23 @@
 /**
- * @param {number[][]} graph
- * @return {number[][]}
+ * @param {number[]} people
+ * @param {number} limit
+ * @return {number}
  */
-var allPathsSourceTarget = function (graph) {
-  const allPaths = [],
-    curPath = [];
+var numRescueBoats = function (people, limit) {
+  people.sort((a, b) => a - b);
+  let totalCount = 0,
+    start = 0,
+    end = people.length - 1;
 
-  dfs(0, curPath);
-
-  return allPaths;
-
-  function dfs(source, curPath) {
-    curPath.push(source);
-
-    if (source === graph.length - 1) {
-      allPaths.push(curPath.slice());
+  while (start <= end) {
+    if (people[start] + people[end] <= limit) {
+      start++;
     }
-
-    for (let next of graph[source]) {
-      dfs(next, curPath);
-    }
-
-    curPath.pop();
+    end--;
+    totalCount++;
   }
+
+  return totalCount;
 };
 
-console.log(allPathsSourceTarget([[1, 2], [3], [3], []]));
+numRescueBoats([3, 2, 2, 1], 3);
