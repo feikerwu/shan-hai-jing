@@ -1,19 +1,28 @@
 /**
- * @param {string} S
- * @return {string}
+ * @param {number[][]} graph
+ * @return {number[][]}
  */
-var compressString = function (S) {
-  let newStr = '';
-  for (let i = 0; i < S.length; i++) {
-    let preChar = S[i],
-      count = 1;
-    while (S[i + 1] === preChar && i < S.length) {
-      count++;
-      i++;
+var allPathsSourceTarget = function (graph) {
+  const allPaths = [],
+    curPath = [];
+
+  dfs(0, curPath);
+
+  return allPaths;
+
+  function dfs(source, curPath) {
+    curPath.push(source);
+
+    if (source === graph.length - 1) {
+      allPaths.push(curPath.slice());
     }
-    newStr += `${preChar}${count}`;
+
+    for (let next of graph[source]) {
+      dfs(next, curPath);
+    }
+
+    curPath.pop();
   }
-  return newStr.length >= S.length ? S : newStr;
 };
 
-console.log(compressString('aabcccccaaa'));
+console.log(allPathsSourceTarget([[1, 2], [3], [3], []]));
