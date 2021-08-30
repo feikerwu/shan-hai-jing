@@ -1,23 +1,34 @@
 /**
- * @param {number[]} people
- * @param {number} limit
- * @return {number}
+ * @param {number[]} w
  */
-var numRescueBoats = function (people, limit) {
-  people.sort((a, b) => a - b);
-  let totalCount = 0,
-    start = 0,
-    end = people.length - 1;
+var Solution = function (w) {
+  let sum = 0,
+    weights = [];
 
-  while (start <= end) {
-    if (people[start] + people[end] <= limit) {
-      start++;
-    }
-    end--;
-    totalCount++;
+  for (let v of w) {
+    sum += v;
+    weights.push(sum);
   }
 
-  return totalCount;
+  this.weights = weights;
+  this.sum = sum;
 };
 
-numRescueBoats([3, 2, 2, 1], 3);
+/**
+ * @return {number}
+ */
+Solution.prototype.pickIndex = function () {
+  const { sum, weights } = this;
+  let randomNum = Math.floor(Math.random() * sum);
+  for (let i = 0; i < weights.length; i++) {
+    if (weights[i] > randomNum) {
+      return i;
+    }
+  }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * var obj = new Solution(w)
+ * var param_1 = obj.pickIndex()
+ */
