@@ -1,34 +1,31 @@
 /**
- * @param {number[]} w
+ * @param {number[][]} bookings
+ * @param {number} n
+ * @return {number[]}
  */
-var Solution = function (w) {
-  let sum = 0,
-    weights = [];
+var corpFlightBookings = function (bookings, n) {
+  let seats = Array.from({ length: n }).fill(0);
 
-  for (let v of w) {
-    sum += v;
-    weights.push(sum);
-  }
-
-  this.weights = weights;
-  this.sum = sum;
-};
-
-/**
- * @return {number}
- */
-Solution.prototype.pickIndex = function () {
-  const { sum, weights } = this;
-  let randomNum = Math.floor(Math.random() * sum);
-  for (let i = 0; i < weights.length; i++) {
-    if (weights[i] > randomNum) {
-      return i;
+  // 计算每个航班新增的seat数 (ps: 可正可负)
+  for (let [start, end, seat] of bookings) {
+    seats[start - 1] += seat;
+    if (end < n) {
+      seats[end] -= seat;
     }
   }
+
+  // 前缀和
+  for (let i = 0; i < n - 1; i++) {
+    seats[i + 1] += seats[i];
+  }
+  return seats;
 };
 
-/**
- * Your Solution object will be instantiated and called as such:
- * var obj = new Solution(w)
- * var param_1 = obj.pickIndex()
- */
+corpFlightBookings(
+  [
+    [1, 2, 10],
+    [2, 3, 20],
+    [2, 5, 25],
+  ],
+  5
+);
