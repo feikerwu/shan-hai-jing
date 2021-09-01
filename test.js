@@ -1,31 +1,37 @@
 /**
- * @param {number[][]} bookings
- * @param {number} n
- * @return {number[]}
+ * @param {string} version1
+ * @param {string} version2
+ * @return {number}
  */
-var corpFlightBookings = function (bookings, n) {
-  let seats = Array.from({ length: n }).fill(0);
+var compareVersion = function (version1, version2) {
+  let flag = 0;
 
-  // 计算每个航班新增的seat数 (ps: 可正可负)
-  for (let [start, end, seat] of bookings) {
-    seats[start - 1] += seat;
-    if (end < n) {
-      seats[end] -= seat;
+  let ver1 = version1.split('.');
+  let ver2 = version2.split('.');
+
+  for (let i = 0; i < Math.max(ver1.length, ver2.length); i++) {
+    let cur1 = ver1[i] ?? 0,
+      cur2 = ver2[i] ?? 0;
+
+    cur1 = parseToNumber(cur1);
+    cur2 = parseToNumber(cur2);
+
+    if (cur1 !== cur2) {
+      return cur1 > cur2 ? 1 : -1;
     }
   }
 
-  // 前缀和
-  for (let i = 0; i < n - 1; i++) {
-    seats[i + 1] += seats[i];
-  }
-  return seats;
+  return flag;
 };
 
-corpFlightBookings(
-  [
-    [1, 2, 10],
-    [2, 3, 20],
-    [2, 5, 25],
-  ],
-  5
-);
+function parseToNumber(value) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  value = value.replace(/^0+/, '');
+
+  return Number(value);
+}
+
+console.log(compareVersion('1.01', '1.001'));
