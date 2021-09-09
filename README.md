@@ -2,6 +2,11 @@
 
 <img src="./src/assets/xuan-gui.jpeg" style="width: 100%" />
 
+
+### leetcode
++ [leetcode 日常刷题](./content/algorithm/daily)
+
+
 ### react
 + [redux 源码浅析](./content/blog/redux-source-code/index.md)
 + [fiber](./content/blog/fiber.md)
