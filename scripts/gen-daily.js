@@ -1,20 +1,20 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
-const dailyDir = path.resolve(process.cwd(), 'content/algorithm/daily/2021')
+const dailyDir = path.resolve(process.cwd(), 'content/algorithm/daily/2021');
 
-let dir = fs.readdirSync(dailyDir)
+let dir = fs.readdirSync(dailyDir);
 
-
-let dailyFiles = []
+let dailyFiles = [],
+  count = 1;
 
 for (let file of dir) {
-  let content = fs.readFileSync(path.resolve(dailyDir, file), 'utf8')
+  let content = fs.readFileSync(path.resolve(dailyDir, file), 'utf8');
   // console.log(content)
-  let title = content.match(/title:(.*)\n/)[1].trim()
-  dailyFiles.push(`[${title}](./2021/${file})`)
+  let title = content.match(/title:(.*)\n/)[1].trim();
+  dailyFiles.push(`${count++}. [${title}](./2021/${file}) `);
 }
 
-const finalMarkDown = dailyFiles.join('\n')
+const finalMarkDown = dailyFiles.join('\n');
 
-fs.writeFileSync(path.resolve(dailyDir, '../README.md'), finalMarkDown)
+fs.writeFileSync(path.resolve(dailyDir, '../README.md'), finalMarkDown);
