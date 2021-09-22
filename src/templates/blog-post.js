@@ -17,26 +17,24 @@ const BlogPostTemplate = ({ data, location }) => {
         description={post.frontmatter.description || post.excerpt}
       />
       <TOC
-        headings={post.headings.map(heading => ({
+        headings={post.headings.map((heading) => ({
           ...heading,
           url: `${post.fields.slug}#${heading.id}`,
         }))}
       ></TOC>
       <article
-        className='blog-post'
+        className="blog-post"
         itemScope
-        itemType='http://schema.org/Article'
+        itemType="http://schema.org/Article"
       >
-
-
         <header>
-          <h1 itemProp='headline'>{post.frontmatter.title}</h1>
+          <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
 
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp='articleBody'
+          itemProp="articleBody"
         />
 
         <hr />
@@ -44,7 +42,7 @@ const BlogPostTemplate = ({ data, location }) => {
           <Bio />
         </footer>
       </article>
-      <nav className='blog-post-nav'>
+      <nav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -56,14 +54,14 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel='prev'>
+              <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel='next'>
+              <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
               </Link>
             )}
