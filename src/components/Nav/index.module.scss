@@ -1,0 +1,250 @@
+.heading {
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.hr {
+  height: 2px;
+  width: 9rem;
+  background-color: var(--black);
+  margin-bottom: 2rem;
+}
+
+.navlink-container {
+  text-decoration: none;
+  list-style-type: none;
+  margin-bottom: 2rem;
+  margin-left: 0;
+}
+
+.navlink-container > li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.point {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 10px;
+  margin-right: 0.5rem;
+}
+
+.yellow {
+  background-color: var(--yellow);
+}
+
+.orange {
+  background-color: var(--orange);
+}
+
+.crimson {
+  background-color: var(--crimson);
+}
+
+.green {
+  background-color: var(--limegreen);
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 0.4rem 0.5rem;
+  margin-bottom: 0.2rem;
+  color: var(--black);
+  font-weight: 300;
+}
+
+.nav-list {
+  min-height: 35vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.nav-link:hover {
+  color: var(--darkgray);
+  background-color: var(--dirtysnow);
+  border-radius: 5px;
+}
+
+.active-nav-link {
+  color: var(--darkgray);
+  background-color: var(--snow);
+  border: 1px solid var(--silver);
+  border-radius: 5px;
+  outline: solid 1px var(--silver);
+  outline-offset: -3px;
+}
+
+.imgBorder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 1rem 1rem 1rem;
+}
+
+.imgWrapper {
+  background-image: linear-gradient(var(--yellow), var(--palepink));
+  border-radius: 50%;
+  width: 14rem;
+  height: 14rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  margin: 2rem 0;
+  height: 13rem;
+  width: 208px;
+  border-radius: 50%;
+  mask-image: radial-gradient(white, black);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.socialIcon {
+  margin-right: 0.75rem;
+  height: 1.5rem;
+  width: auto;
+  filter: invert(19%) sepia(0%) saturate(1833%) hue-rotate(136deg)
+    brightness(79%) contrast(67%);
+}
+
+.mailIcon {
+  height: 1.35rem;
+  width: auto;
+  margin-bottom: 1.5rem;
+  filter: invert(19%) sepia(0%) saturate(1833%) hue-rotate(136deg)
+    brightness(79%) contrast(67%);
+}
+
+.githubLink:hover {
+  filter: invert(21%) sepia(97%) saturate(6051%) hue-rotate(272deg)
+    brightness(90%) contrast(119%);
+}
+
+.twitterLink:hover {
+  filter: invert(55%) sepia(97%) saturate(1570%) hue-rotate(181deg)
+    brightness(92%) contrast(87%);
+}
+
+.linkedinLink:hover {
+  filter: invert(38%) sepia(90%) saturate(5308%) hue-rotate(295deg)
+    brightness(102%) contrast(82%);
+}
+
+.researchgateLink:hover {
+  filter: invert(75%) sepia(68%) saturate(1249%) hue-rotate(90deg)
+    brightness(95%) contrast(109%);
+}
+
+.mailLink:hover {
+  filter: invert(42%) sepia(26%) saturate(5455%) hue-rotate(3deg)
+    brightness(104%) contrast(108%);
+}
+
+@media (max-width: 900px) {
+  .imgWrapper {
+    width: 11rem;
+    height: 11rem;
+  }
+
+  .img {
+    margin: 0.5rem 0;
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .nav-list {
+    min-height: 20vh;
+    margin-top: 1rem;
+  }
+
+  .navlink-container > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navlink-container {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-evenly;
+    width: 70%;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+
+  .hr {
+    margin-bottom: 1.25rem;
+  }
+
+  .point {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-right: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .socialContainer {
+    border-top: 1px solid var(--silver);
+    padding-top: 0.5rem;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .socialIcon {
+    height: 1.25rem;
+    margin: 0 0.25rem 0.5rem 0.25rem;
+  }
+
+  .mailIcon {
+    height: 1.1rem;
+    margin: 0 0.25rem 0.5rem 0.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navlink-container {
+    width: 90%;
+  }
+
+  .mailIcon {
+    margin: 0.05rem 0.25rem 0rem 0.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.35rem;
+  }
+
+  .point {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .navlink-container {
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+  }
+
+  .point {
+    margin-right: 0.15rem;
+  }
+}
