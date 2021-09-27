@@ -1,54 +1,38 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+## 山海经
 
-## 🚀 Quick start
+<img src="./src/assets/xuan-gui.jpeg" style="width: 100%" />
 
-1.  **Create a Gatsby site.**
+### leetcode
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+- [leetcode 日常刷题](./content/algorithm/daily)
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+### react
 
-2.  **Start developing.**
+- [redux 源码浅析](./content/blog/redux-source-code/index.md)
+- [fiber](./content/blog/fiber.md)
 
-    Navigate into your new site’s directory and start it up.
+### node
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+- [node CLS 全链路追踪以及其实现原理](./content/blog/cls-in-node.md)
+- [nest 中 IoC & DI 的实现](./content/blog/IoT-in-nest.md)
+- [如何实现一个命令行的进度条](./content/blog/process-in-TTY.md)
+- [如何在 nodejs 内解析其它脚本](./content/blog/run-python-in-node.md)
+- [v8 中的内存管理](./content/blog/v8-memory.md)
+- [node 如何拦截 require 函数](./content/blog/hook-node-require.md)
 
-3.  **Open the code and start customizing!**
+### 算法
 
-    Your site is now running at http://localhost:8000!
+- [字符串匹配算法](./content/blog/algo-kmp.md)
+- [最长上升子序列](./content/blog/algo-long-increasing-subsequence.md)
+- [搜索](./content/blog/algo-search.md)
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+### 其它
 
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+- [用户行为轨迹回放](./content/blog/user-track.md)
+- [webpack 如何生成 hash 的](./content/blog/webpack-hash.md)
+- [linux 软链](./content/blog/linux-link.md)
+- [深入理解 git](./content/blog/deep-in-git.md)
+- [前端安全](./content/blog/fe-security.md)
+- [如何实现一个并发的任务管理器](./content/blog/concurrent-promise.md)
+- [如何实现锚点定位双向更新](./content/blog/toc.md)
+- [记一次 http 缓存锁的探索](./content/blog/cache-lock.md)

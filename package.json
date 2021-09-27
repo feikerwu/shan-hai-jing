@@ -1,18 +1,21 @@
 {
   "name": "shan-hai-jing",
-  "version": "1.0.0",
   "private": true,
   "description": "shan-hai-jing",
-  "author": "feikerwu",
-  "keywords": [
-    "gatsby"
-  ],
+  "version": "0.1.0",
+  "author": "feiker wu <feikerwu@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/feikerwu/shan-hai-jing/issues"
+  },
+  "homepage": "https://github.com/feikerwu/shan-hai-jing#readme",
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "daily": "node scripts/leetcode-daily.js",
+    "gen-daily": "node scripts/gen-daily.js"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.4",
