@@ -39,9 +39,18 @@
   --babygreen: #21d51130;
   --babypink: #e637bf30;
   --regular-font: 'Anonymous Pro';
-  --article-font: 'Raleway';
-  --heading-font: 'Share Tech Mono';
+  --article-font: 'Operator Mono';
+  --hardwriting-font: 'long cang';
   --pixel-font: 'Rock Salt';
+
+  --fontSize-0: 0.833rem;
+  --fontSize-1: 1rem;
+  --fontSize-2: 1.2rem;
+  --fontSize-3: 1.44rem;
+  --fontSize-4: 1.728rem;
+  --fontSize-5: 2.074rem;
+  --fontSize-6: 2.488rem;
+  --fontSize-7: 2.986rem;
 }
 
 #gatsby-plugin-page-progress {
@@ -60,6 +69,7 @@ html {
   box-sizing: border-box;
   overflow-y: scroll;
 }
+
 body {
   font-family: var(--regular-font), sans-serif;
   color: var(--black);
@@ -274,41 +284,43 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 0.5rem;
-  padding: 0;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1rem;
+
   color: inherit;
   font-family: var(--heading-font), BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  line-height: 1.1;
 }
+
 h1 {
-  font-size: 2.25rem;
+  font-weight: var(--fontWeight-black);
+  font-size: var(--fontSize-6);
+  color: var(--color-heading-black);
 }
+
 h2 {
-  font-size: 1.62671rem;
+  font-size: var(--fontSize-5);
 }
+
 h3 {
-  font-size: 1.38316rem;
-  margin-top: 1.25rem;
+  font-size: var(--fontSize-4);
 }
+
 h4 {
-  font-size: 1.1rem;
-  font-family: inherit !important;
-  font-weight: bolder;
-  margin-top: 1.5rem;
+  font-size: var(--fontSize-3);
 }
+
 h5 {
-  font-size: 0.9rem;
-  font-family: var(--article-font) !important;
+  font-size: var(--fontSize-2);
 }
+
 h6 {
-  font-size: 0.78405rem;
-  font-family: var(--article-font) !important;
-  font-weight: normal;
-  opacity: 0.7;
+  font-size: var(--fontSize-1);
 }
+
 ol,
 ul {
   margin: 0 0 1.45rem 1.45rem;
@@ -347,10 +359,17 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
 blockquote {
-  margin: 0 1.45rem 1.45rem;
+  // margin: 0 1.45rem 1.45rem;
+
+  font-style: italic;
   padding: 0;
+  border-left: 0.25rem solid var(--mediumpurple);
+  margin: 2rem;
+  padding-left: 1rem;
 }
+
 hr {
   margin: 0 0 calc(1.45rem - 1px) 0;
   padding: 0;

@@ -18,6 +18,13 @@
     "gen-daily": "node scripts/gen-daily.js"
   },
   "dependencies": {
+    "@fontsource/anonymous-pro": "^4.5.0",
+    "@fontsource/long-cang": "^4.5.0",
+    "@fontsource/raleway": "^4.5.0",
+    "@fontsource/roboto-mono": "^4.5.0",
+    "@fontsource/rock-salt": "^4.5.0",
+    "@fontsource/share-tech-mono": "^4.5.0",
+    "@fontsource/zcool-kuaile": "^4.5.0",
     "@heroicons/react": "^1.0.4",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",

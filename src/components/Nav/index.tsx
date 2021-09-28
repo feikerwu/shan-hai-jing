@@ -1,11 +1,10 @@
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
-// import beaker from '@/images/main/beaker.svg';
+
 import mail from '@/images/main/envelope.svg';
 import github from '@/images/main/social-1_round-github.svg';
-// import linkedin from '@/images/main/social-1_round-linkedin.svg';
-// import twitter from '@/images/main/social-1_round-twitter.svg';
+
 import styles from './index.module.scss';
 
 const Navigation = () => {
@@ -48,7 +47,7 @@ const Navigation = () => {
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
             >
-              Blog{' '}
+              博客{' '}
             </Link>
           </li>
           <li>
