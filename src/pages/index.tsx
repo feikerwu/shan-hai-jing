@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import { getTags, getTagColor } from '@/utils';
 import Layout from '../components/Layout';
 import styles from '@/styles/entry.module.scss';
 
+// import usePostListByTag from '../hooks/usePostListByTag';
+
+function filterByTag(lists: any[], tag: string) {
+  if (tag === '') {
+    return lists;
+  }
+
+  let filter = node =>
+    node.frontmatter.tag === tag ||
+    (node.frontmatter.tags && node.frontmatter.tags.indexOf(tag) !== -1);
+
+  return lists.filter(filter);
+}
+
 export default ({ data }) => {
+  const [tag, setTag] = useState('');
   const { allMarkdownRemark } = data;
-  const { nodes } = allMarkdownRemark;
+  const nodes = filterByTag(allMarkdownRemark.nodes, tag);
 
   return (
     <div>
@@ -14,11 +29,13 @@ export default ({ data }) => {
         <div className={styles.blogList}>
           {nodes.map(node => (
             <PostEntry
+              key={node.id}
               {...node.frontmatter}
               slug={node.fields.slug}
               id={node.id}
               desc={node.frontmatter.desc || node.excerpt}
               tags={getTags(node.frontmatter.tags || node.frontmatter.tag)}
+              onTagClick={tag => setTag(tag)}
             ></PostEntry>
           ))}
         </div>
@@ -27,7 +44,7 @@ export default ({ data }) => {
   );
 };
 
-const PostEntry = ({ title, date, tags, id, slug, desc }) => {
+const PostEntry = ({ title, date, tags, id, slug, desc, onTagClick }) => {
   return (
     <div className={styles.entry}>
       <Link to={slug} className={styles.titleWrapper}>
@@ -38,6 +55,8 @@ const PostEntry = ({ title, date, tags, id, slug, desc }) => {
       <div className={styles.tags}>
         {tags.map(tag => (
           <span
+            key={tag}
+            onClick={() => onTagClick(tag)}
             className={styles.tag}
             style={{ backgroundColor: getTagColor(tag) }}
           >

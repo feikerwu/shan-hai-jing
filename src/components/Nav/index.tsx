@@ -94,7 +94,7 @@ const Navigation = () => {
             />
           </a>
 
-          <a href='feikerwu@gmail.com' target='_blank' rel='noreferrer'>
+          <a href='mailto:feikerwu@gmail.com' target='_blank' rel='noreferrer'>
             <img
               src={mail}
               alt='mail'

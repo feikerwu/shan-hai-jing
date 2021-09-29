@@ -44,6 +44,7 @@
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-transformer-remark": "^4.11.0",
     "gatsby-transformer-sharp": "^3.14.0",
+    "handlebars": "^4.7.7",
     "prismjs": "^1.25.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
