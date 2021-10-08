@@ -1,6 +1,6 @@
 ## 山海经
 
-<img src="./src/assets/xuan-gui.jpeg" style="width: 100%" />
+<!-- <img src="./src/assets/xuan-gui.jpeg" style="width: 100%" /> -->
 
 ### leetcode
 
