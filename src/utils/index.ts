@@ -36,8 +36,8 @@ export function getTagColor(tag: string) {
 
   tagColorMaps[tag] = getRandomColor();
 
-  if (localStorage) {
-    localStorage.setItem('tagColorMaps', JSON.stringify(tagColorMaps));
+  if (typeof window !== 'undefined' && window.localStorage) {
+    window.localStorage.setItem('tagColorMaps', JSON.stringify(tagColorMaps));
   }
 
   return tagColorMaps[tag];
