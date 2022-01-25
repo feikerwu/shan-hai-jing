@@ -24,7 +24,9 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-const tagColorMaps = JSON.parse(localStorage.getItem('tagColorMaps') || '{}');
+const tagColorMaps = localStorage
+  ? JSON.parse(localStorage.getItem('tagColorMaps') || '{}')
+  : {};
 
 export function getTagColor(tag: string) {
   if (tagColorMaps[tag]) {
@@ -33,7 +35,9 @@ export function getTagColor(tag: string) {
 
   tagColorMaps[tag] = getRandomColor();
 
-  localStorage.setItem('tagColorMaps', JSON.stringify(tagColorMaps));
+  if (localStorage) {
+    localStorage.setItem('tagColorMaps', JSON.stringify(tagColorMaps));
+  }
 
   return tagColorMaps[tag];
 }
