@@ -24,9 +24,10 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-const tagColorMaps = localStorage
-  ? JSON.parse(localStorage.getItem('tagColorMaps') || '{}')
-  : {};
+const tagColorMaps =
+  typeof window !== 'undefined'
+    ? JSON.parse(localStorage.getItem('tagColorMaps') || '{}')
+    : {};
 
 export function getTagColor(tag: string) {
   if (tagColorMaps[tag]) {
