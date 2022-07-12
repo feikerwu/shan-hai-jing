@@ -1,4 +1,6 @@
 .layout {
   max-width: 42em;
   margin: 0 auto;
+
+  line-height: 1.8em;
 }

@@ -9,6 +9,7 @@ specifiers:
   eslint-config-next: 12.2.2
   gray-matter: ^4.0.3
   grey-matter: ^0.0.0
+  highlight.js: ^11.5.1
   next: 12.2.2
   react: 18.2.0
   react-dom: 18.2.0
@@ -22,6 +23,7 @@ dependencies:
   dayjs: 1.11.3
   gray-matter: 4.0.3
   grey-matter: 0.0.0
+  highlight.js: 11.5.1
   next: 12.2.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1235,6 +1237,11 @@ packages:
 
   /hast-util-whitespace/2.0.0:
     resolution: {integrity: sha512-Pkw+xBHuV6xFeJprJe2BBEoDV+AvQySaz3pPDRUs5PNZEMQjpXJJueqrpcHIXxnWTcAGi/UOCgVShlkY6kLoqg==}
+    dev: false
+
+  /highlight.js/11.5.1:
+    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /html-void-elements/2.0.1:

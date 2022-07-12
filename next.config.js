@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: ['cdn.jsdelivr.net'],
+    domains: ['cdn.jsdelivr.net', 'user-images.githubusercontent.com'],
   },
 };
 
