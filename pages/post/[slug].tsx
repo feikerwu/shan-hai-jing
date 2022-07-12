@@ -1,9 +1,15 @@
 import type { NextPage } from 'next';
 import { getAllPosts, getPostBySlug } from 'services/blog';
+import Markdown from 'components/Markdown';
+
 import markdownToHtml from 'utils/markdown';
 
 const Post: NextPage<Post> = ({ content }) => {
-  return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
+  return (
+    <div>
+      <Markdown content={content}></Markdown>
+    </div>
+  );
 };
 
 export default Post;
@@ -15,7 +21,7 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug);
 
-  post.content = await markdownToHtml(post.content);
+  // post.content = await markdownToHtml(post.content);
 
   return {
     props: {

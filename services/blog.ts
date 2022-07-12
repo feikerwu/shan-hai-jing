@@ -17,15 +17,23 @@ export function getPostSlugs() {
 
 const descLimit = 100;
 
+const excerptFile = (file: any) => {
+  file.excerpt = file.content.split('\n').slice(0, 4).join(' ');
+  return file.excerpt;
+};
+
 export function getPostBySlug(slug: string) {
   const fullFilePath = join(blogDirs, `${slug}.md`);
   const fileContent = fs.readFileSync(fullFilePath, 'utf8');
-  const { data, content } = matter(fileContent);
+
+  const { data, content, excerpt } = matter(fileContent, {
+    excerpt: excerptFile,
+  });
 
   const result = {
     date: +new Date(),
     title: slug,
-    desc: content.slice(0, descLimit) || null,
+    desc: excerpt,
     content,
     slug,
     ...data,
@@ -40,6 +48,6 @@ export function getAllPosts() {
   const slugs = getPostSlugs();
   const posts = slugs
     .map(slug => getPostBySlug(slug))
-    .sort((a, b) => +new Date(a.date) - +new Date(b.date));
+    .sort((a, b) => +new Date(b.date) - +new Date(a.date));
   return posts;
 }

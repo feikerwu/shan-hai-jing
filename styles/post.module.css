@@ -1,0 +1,15 @@
+.item {
+  margin-bottom: 60px;
+}
+
+.date {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.8em;
+}
+
+.desc {
+  margin: 10px 0;
+  line-height: 1.8em;
+  font-size: 16px;
+}

@@ -7,17 +7,35 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: #333;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 a:hover,
 a:focus,
 a:active {
-  text-decoration: underline;
+  color: #05c;
+  box-shadow: 0 1px 0 0 #fff, 0 3px 0 0 #05c;
   cursor: pointer;
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+
+body {
+  color: #000;
 }
