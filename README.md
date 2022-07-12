@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 山海经
 
-## Getting Started
+<!-- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ffeikerwu%2Fshan-hai-jing&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) -->
 
-First, run the development server:
+<!-- <img src="./src/assets/xuan-gui.jpeg" style="width: 100%" /> -->
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### leetcode
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [leetcode 日常刷题](./content/algorithm/daily)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### react
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- [redux 源码浅析](./content/blog/redux-source-code/index.md)
+- [fiber](./content/blog/fiber.md)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### node
 
-## Learn More
+- [node CLS 全链路追踪以及其实现原理](./content/blog/cls-in-node.md)
+- [nest 中 IoC & DI 的实现](./content/blog/IoT-in-nest.md)
+- [如何实现一个命令行的进度条](./content/blog/process-in-TTY.md)
+- [如何在 nodejs 内解析其它脚本](./content/blog/run-python-in-node.md)
+- [v8 中的内存管理](./content/blog/v8-memory.md)
+- [node 如何拦截 require 函数](./content/blog/hook-node-require.md)
 
-To learn more about Next.js, take a look at the following resources:
+### 算法
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [字符串匹配算法](./content/blog/algo-kmp.md)
+- [最长上升子序列](./content/blog/algo-long-increasing-subsequence.md)
+- [搜索](./content/blog/algo-search.md)a
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 其它
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [用户行为轨迹回放](./content/blog/user-track.md)
+- [webpack 如何生成 hash 的](./content/blog/webpack-hash.md)
+- [linux 软链](./content/blog/linux-link.md)
+- [深入理解 git](./content/blog/deep-in-git.md)
+- [前端安全](./content/blog/fe-security.md)
+- [如何实现一个并发的任务管理器](./content/blog/concurrent-promise.md)
+- [如何实现锚点定位双向更新](./content/blog/toc.md)
+- [记一次 http 缓存锁的探索](./content/blog/cache-lock.md)
