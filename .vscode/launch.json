@@ -1,0 +1,16 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Current TS File",
+      "type": "pwa-node",
+      "request": "launch",
+      "program": "/Users/feiwu/.nvm/versions/node/v16.14.2/pnpm-global/5/node_modules/esbuild-runner/bin/esr.js",
+      "args": ["${relativeFile}"],
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    }
+  ]
+}

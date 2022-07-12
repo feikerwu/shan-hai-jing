@@ -1,0 +1,129 @@
+---
+title: 记一次 http 缓存锁的探索
+date: 2020-12-08
+description: 对思否一个问题引起的思考
+---
+
+这次记录起源来自思否上的一个问题: [node阻塞问题怎么解决](https://segmentfault.com/q/1010000038403087)
+
+根据问题描述，给定以下两段代码
+
+```js
+// server.js
+const http = require('http');
+const { fork } = require('child_process');
+const path = require('path');
+http
+  .createServer((req, res) => {
+    if (req.url === '/sum') {
+      let childProcess = fork('calc.js', {
+        cwd: path.resolve(__dirname),
+      });
+      childProcess.on('message', function (data) {
+        res.end(data.time + '');
+      });
+    } else {
+      res.end('end');
+    }
+  })
+  .listen(8888);
+
+```
+
+```js
+const process = require('process');
+var endTime = new Date().getTime() + 10000;
+while (new Date().getTime() < endTime) {}
+process.send({
+  time: new Date() + '-----------------------------------------',
+});
+
+```
+
+在浏览器中开两个tab访问`localhost:8888/sum`, 可以观测到第二个tab明显的阻塞。
+
+### 理论分析
+
+简单看下两段脚本，可以看出是在模拟 node 针对 cpu 密集型场景的处理，对每个 `/sum`请求，利用`child_process`新开一个子进程处理时长10s的操作，通过进程间通信返回处理结果，并返回用户请求结果。
+
+理论上看，子进程不应该阻塞主进程对之后请求的处理，但是的确观测到浏览器第二个tab打开有明显超过10s的耗时，我们从浏览器端看下发生了什么。
+
+### 问题排查
+
+看下两个tab的network情况
+
+![image-20201208155617350](https://cdn.jsdelivr.net/gh/feikerwu/figure-bed@master/assets/image-20201208155617350.png)
+
+
+
+发现第二个tab时延主要发生在stalled阶段，翻一下 [谷歌开发者文档](https://developers.google.com/web/tools/chrome-devtools/network/understanding-resource-timing#viewing_in_devtools)
+
+> **Queuing**
+>
+> A request being queued indicates that:
+>
+> - The request was postponed by the rendering engine because it's considered lower priority than critical resources (such as scripts/styles). This often happens with images.
+> - The request was put on hold to wait for an unavailable TCP socket that's about to free up.
+> - The request was put on hold because the browser only allows [six TCP connections](https://crbug.com/12066) per origin on HTTP 1.
+> - Time spent making disk cache entries (typically very quick.)
+>
+>  **Stalled/Blocking**
+>
+> Time the request spent waiting before it could be sent. It can be waiting for any of the reasons described for Queueing. Additionally, this time is inclusive of any time spent in proxy negotiation.
+
+简单来说，stalled 时延发生在请求发出之前，会因为
+
+> - 请求已被渲染引擎推迟，因为该请求的优先级被视为低于关键资源（例如脚本/样式）的优先级。 图像经常发生这种情况。
+> - 请求已被暂停，以等待将要释放的不可用 TCP 套接字。
+> - 请求已被暂停，因为在 HTTP 1 上，浏览器仅允许每个源拥有六个 TCP 连接。
+> - 生成磁盘缓存条目所用的时间（通常非常迅速)
+
+等原因导致阻塞。
+
+但是我们只发起了一个请求，并不会出现请求优先级/TCP连接数限制等问题，但是感觉距离问题真相越来越近，google 了一下，找到以下东西
+
+1. [chromium开发者文档 http-cache ](https://www.chromium.org/developers/design-documents/network-stack/http-cache)
+
+   > Enforce the cache lock.
+   >
+   > The cache implements a single writer - multiple reader lock so that only one network request for the same resource is in flight at any given time.
+   >
+   > Note that the existence of the cache lock means that no bandwidth is wasted re-fetching the same resource simultaneously. On the other hand, it forces requests to wait until a previous request finishes downloading a resource...
+
+2. [chromium code review](https://codereview.chromium.org/345643003)
+
+3. [FEX 关于请求被挂起页面加载缓慢问题的追查](https://fex.baidu.com/blog/2015/01/chrome-stalled-problem-resolving-process/)
+
+问题归溯到一个叫**缓存锁** 的问题，[文档](https://www.chromium.org/developers/design-documents/network-stack/http-cache)里说的很详细，chrome 对每个请求生成了一个cacheEntry，cacheEntry 实现了一个单写多读的锁。
+
+单写多读锁，简单说，就是对资源的访问分为两种状态，一种是读操作，另一种是写操作。由应用程序提示锁应该做哪种操作。当为读模式时，所有的写动作被悬挂，而读请求被允许通过，而写动作时，所有操作被悬挂。并且，读写切换时，有足够的状态等待，直到真正安全时，才会切换动作。
+
+所以在第一个tab请求 `/sum`时, 属于`/sum`的cache处于写操作，第二个tab请求`/sum`时，发现已经有属于`/sum`的cache并处于写操作，所以被挂起。
+
+### 验证解决
+
+既然是缓存引起的，禁用缓存看看页面挂起是否会复现
+
+![image-20201208162818504](https://cdn.jsdelivr.net/gh/feikerwu/figure-bed@master/assets/image-20201208162818504.png)
+
+禁用缓存后，stalled时延几乎掉0
+
+
+
+### 总结
+
+针对接口请求可以通过以下方案绕过cache lock
+
+1. 缓存控制为 no-cache， no-store
+2. 每个请求加时间戳query
+
+
+
+### 参考
+
++ [chromium开发者文档 http-cache ](https://www.chromium.org/developers/design-documents/network-stack/http-cache)
++ [chromium code review](https://codereview.chromium.org/345643003)
++ [FEX 关于请求被挂起页面加载缓慢问题的追查](https://fex.baidu.com/blog/2015/01/chrome-stalled-problem-resolving-process/)
+
++ [[一次 Chrome 缓存锁的有趣探索](https://www.codesky.me/archives/something-about-chrome-cache-lock.wind)]
+
