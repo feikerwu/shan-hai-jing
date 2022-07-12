@@ -12,26 +12,23 @@ const blogDirs = join(process.cwd(), './content/blog');
  * 获取所有的 markdown 文件名
  */
 export function getPostSlugs() {
-  return fs.readdirSync(blogDirs);
+  return fs.readdirSync(blogDirs).map(file => file.replace(/\.md$/, ''));
 }
 
-const mustNeededFields = ['title', 'date', 'desc'];
 const descLimit = 100;
 
-export function getPostBySlug(slug: string, fileds = mustNeededFields) {
-  const realSlug = slug.replace(/\.md$/, '');
-  const fullFilePath = join(blogDirs, slug);
-  console.log(fullFilePath);
+export function getPostBySlug(slug: string) {
+  const fullFilePath = join(blogDirs, `${slug}.md`);
   const fileContent = fs.readFileSync(fullFilePath, 'utf8');
   const { data, content } = matter(fileContent);
 
   const result = {
     date: +new Date(),
     title: slug,
-    desc: content.slice(0, descLimit),
-    ...partial(data, fileds),
+    desc: content.slice(0, descLimit) || null,
     content,
     slug,
+    ...data,
   };
 
   result.date = +result.date;
@@ -39,10 +36,10 @@ export function getPostBySlug(slug: string, fileds = mustNeededFields) {
   return result;
 }
 
-export function getAllPosts(fields: string[]) {
+export function getAllPosts() {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map(slug => getPostBySlug(slug, fields))
+    .map(slug => getPostBySlug(slug))
     .sort((a, b) => +new Date(a.date) - +new Date(b.date));
   return posts;
 }
