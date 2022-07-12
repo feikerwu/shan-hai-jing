@@ -1,5 +1,5 @@
 // 单篇博文的类型
-type Post = {
+export type Post = {
   title: string;
   slug: string;
   desc: string;
