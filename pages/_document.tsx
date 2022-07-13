@@ -4,8 +4,8 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
+        <title>feiker blog</title>
         <Head>
-          <title>feiker's blog</title>
           <link
             href='https://fonts.googleapis.com/css2?family=Inter&display=optional'
             rel='stylesheet'
