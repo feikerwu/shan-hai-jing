@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getAllPosts } from 'services/blog';
 import dayjs from 'dayjs';
 import styles from 'styles/post.module.css';
-import Markdown from 'components/Markdown';
 import type { Post } from 'types';
 
 type ListPageProps = {
