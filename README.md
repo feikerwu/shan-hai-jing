@@ -26,7 +26,7 @@
 
 - [字符串匹配算法](./content/blog/algo-kmp.md)
 - [最长上升子序列](./content/blog/algo-long-increasing-subsequence.md)
-- [搜索](./content/blog/algo-search.md)a
+- [搜索](./content/blog/algo-search.md)
 
 ### 其它
 
@@ -38,5 +38,3 @@
 - [如何实现一个并发的任务管理器](./content/blog/concurrent-promise.md)
 - [如何实现锚点定位双向更新](./content/blog/toc.md)
 - [记一次 http 缓存锁的探索](./content/blog/cache-lock.md)
-
-

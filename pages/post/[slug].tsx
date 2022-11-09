@@ -3,6 +3,7 @@ import { getAllPosts, getPostBySlug } from 'services/blog';
 import Markdown from 'components/Markdown';
 
 import markdownToHtml from 'utils/markdown';
+
 import type { Post } from 'types';
 
 const Post: NextPage<Post> = ({ content }) => {
