@@ -1,5 +1,4 @@
 import ReactMarkdown from 'react-markdown';
-import Image from 'next/image';
 import remarkGfm from 'remark-gfm';
 
 const MarkdownComponent: React.FC<{ content: string }> = ({ content }) => {
