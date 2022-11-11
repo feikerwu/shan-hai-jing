@@ -4,14 +4,15 @@ import Layout from 'components/Layout';
 import hljs from 'highlight.js';
 // import 'highlight.js/styles/nnfx-light.css';
 import 'highlight.js/styles/atom-one-light.css';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 import 'styles/custom.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useLayoutEffect(() => {
+  useEffect(() => {
     hljs.highlightAll();
   }, []);
+
   return (
     <Layout>
       <Component {...pageProps} />
