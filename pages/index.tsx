@@ -31,10 +31,10 @@ const PostItem: React.FC<Post> = ({ slug, date, title, desc, tags }) => {
 
       <div className={styles.date}>{dayjs(date).format('YYYY-MM-DD')}</div>
 
-      <p className={styles.desc}>
-        {desc}
-        {/* <Markdown content={desc}></Markdown> */}
-      </p>
+      {/* <p className={styles.desc}> */}
+      {/* {desc} */}
+      {/* <Markdown content={desc}></Markdown> */}
+      {/* </p> */}
     </div>
   );
 };
