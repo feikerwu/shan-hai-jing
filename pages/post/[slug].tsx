@@ -1,8 +1,6 @@
 import type { NextPage } from 'next';
 import { getAllPosts, getPostBySlug } from 'services/blog';
-import Markdown from 'components/Markdown';
 import { MDXRemote } from 'next-mdx-remote';
-import markdownToHtml from 'utils/markdown';
 
 import type { Post } from 'types';
 
@@ -10,24 +8,13 @@ import type { Post } from 'types';
 const components = {};
 
 const Post: NextPage<Post> = ({ content, isMdx }) => {
-  console.log(isMdx);
-
   return (
     <div>
-      <MDXRemote {...content} components={components}></MDXRemote>
+      <main>
+        <MDXRemote {...content} components={components}></MDXRemote>
+      </main>
     </div>
   );
-  // return (
-  //   <div>
-  //     <main>
-  //       {isMdx ? (
-
-  //       ) : (
-  //         <Markdown content={content}></Markdown>
-  //       )}
-  //     </main>
-  //   </div>
-  // );
 };
 
 export default Post;
@@ -38,9 +25,6 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const post = await getPostBySlug(params.slug);
-  if (!post.isMdx) {
-    post.content = await markdownToHtml(post.content);
-  }
 
   return {
     props: {

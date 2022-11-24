@@ -15,8 +15,9 @@ a {
 a:hover,
 a:focus,
 a:active {
-  color: #05c;
-  box-shadow: 0 1px 0 0 #fff, 0 3px 0 0 #05c;
+  text-decoration: none;
+  color: var(--select-text-bg-color);
+  box-shadow: 0 1px 0 0 #fff, 0 3px 0 0 var(--select-text-bg-color);
   cursor: pointer;
 }
 
