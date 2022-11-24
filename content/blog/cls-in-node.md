@@ -10,30 +10,30 @@ description: node 中如何追踪某个请求的全链路
 最简单的方法是用一个全局变量暂存请求上下文，在出现异常/需要打日志时从全局变量取，看下面的代码
 
 ```ts
-const express = require('express')
+const express = require('express');
 
-const app = express()
+const app = express();
 
-let globalReq
-let id = 1
+let globalReq;
+let id = 1;
 
 app.use((req, res, next) => {
-  req.id = id++
-  next()
-})
+  req.id = id++;
+  next();
+});
 
 app.get('/', async (req, res) => {
-  globalReq = req
-  await sleep(1000)
-  res.status(200).json({ id: globalReq.id })
-})
+  globalReq = req;
+  await sleep(1000);
+  res.status(200).json({ id: globalReq.id });
+});
 
-app.listen(3000)
+app.listen(3000);
 
 function sleep(ms) {
   return new Promise(resolve => {
-    setTimeout(resolve, ms)
-  })
+    setTimeout(resolve, ms);
+  });
 }
 ```
 
@@ -81,7 +81,7 @@ cls-hooked 这个包从 cls fork 而来，之前提到 `process.addAsyncListener
 async hooks 是 node v8 引入的新特性，通过 async_hooks.createHook(callbacks)创建每个异步事件 `init`, `before`, `after`, `destory` 的生命周期
 
 ```js
-const asyncHooks = require('async-hooks')
+const asyncHooks = require('async-hooks');
 asyncHooks.createHook({
   /**
    * asyncId: 分配给每个异步资源的唯一Id
@@ -94,51 +94,51 @@ asyncHooks.createHook({
   after: asyncId => {},
   destroy: asyncId => {},
   promiseResolve: asyncId => {},
-})
+});
 ```
 
 通过 asyncHooks 可以非常方便的追逐异步事件
 
 ```js
-const async_hooks = require('async_hooks')
-const fs = require('fs')
-let indent = 0
+const async_hooks = require('async_hooks');
+const fs = require('fs');
+let indent = 0;
 async_hooks
   .createHook({
     init(asyncId, type, triggerAsyncId) {
-      const eid = async_hooks.executionAsyncId()
-      const indentStr = '├' + '─'.repeat(indent) + ' '
+      const eid = async_hooks.executionAsyncId();
+      const indentStr = '├' + '─'.repeat(indent) + ' ';
       fs.writeSync(
         process.stdout.fd,
         `${indentStr}${type}(${asyncId}):` +
           ` trigger: ${triggerAsyncId} execution: ${eid}\n`
-      )
+      );
     },
     before(asyncId) {
-      const indentStr = '├' + '─'.repeat(indent) + ' '
-      fs.writeSync(process.stdout.fd, `${indentStr}before:  ${asyncId}\n`)
-      indent += 2
+      const indentStr = '├' + '─'.repeat(indent) + ' ';
+      fs.writeSync(process.stdout.fd, `${indentStr}before:  ${asyncId}\n`);
+      indent += 2;
     },
     after(asyncId) {
-      indent -= 2
-      const indentStr = '├' + '─'.repeat(indent) + ' '
-      fs.writeSync(process.stdout.fd, `${indentStr}after:  ${asyncId}\n`)
+      indent -= 2;
+      const indentStr = '├' + '─'.repeat(indent) + ' ';
+      fs.writeSync(process.stdout.fd, `${indentStr}after:  ${asyncId}\n`);
     },
     destroy(asyncId) {
-      const indentStr = '├' + '─'.repeat(indent) + ' '
-      fs.writeSync(process.stdout.fd, `${indentStr}destroy:  ${asyncId}\n`)
+      const indentStr = '├' + '─'.repeat(indent) + ' ';
+      fs.writeSync(process.stdout.fd, `${indentStr}destroy:  ${asyncId}\n`);
     },
   })
-  .enable()
+  .enable();
 
 require('net')
   .createServer(() => {})
   .listen(8080, () => {
     // Let's wait 10ms before logging the server started.
     setTimeout(() => {
-      console.log('>>>', async_hooks.executionAsyncId())
-    }, 10)
-  })
+      console.log('>>>', async_hooks.executionAsyncId());
+    }, 10);
+  });
 ```
 
 输出

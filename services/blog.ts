@@ -18,8 +18,6 @@ export function getPostSlugs() {
   return fs.readdirSync(blogDirs).map(file => file.replace(/\.mdx?$/, ''));
 }
 
-const descLimit = 100;
-
 const excerptFile = (file: any) => {
   file.excerpt = file.content.split('\n').slice(0, 4).join(' ');
   return file.excerpt;
@@ -51,8 +49,10 @@ export function getPostBySlugWithMd(slug: string): Post {
 }
 
 // 通过文件名的获取到 mdx 内容
-export async function getPostBySlugWithMdx(slug: string): Promise<Post> {
-  const path = join(blogDirs, `${slug}.mdx`);
+export async function getPostBySlugWithMdx(
+  slug: string,
+  path: string
+): Promise<Post> {
   const source = fs.readFileSync(path);
 
   const { content, data, excerpt } = matter(source, { excerpt: excerptFile });
@@ -64,7 +64,7 @@ export async function getPostBySlugWithMdx(slug: string): Promise<Post> {
     },
   });
 
-  return {
+  let result = {
     isMdx: true,
     date: +new Date(),
     title: path,
@@ -73,13 +73,17 @@ export async function getPostBySlugWithMdx(slug: string): Promise<Post> {
     slug,
     ...data,
   };
+
+  result.date = +new Date();
+
+  return result;
 }
 
 export async function getPostBySlug(slug: string) {
-  const mdxPath = join(blogDirs, `${slug}.mdx`);
-  return fs.existsSync(mdxPath)
-    ? await getPostBySlugWithMdx(slug)
-    : getPostBySlugWithMd(slug);
+  let mdxPath = join(blogDirs, `${slug}.md`);
+  mdxPath = fs.existsSync(mdxPath) ? mdxPath : join(blogDirs, `${slug}.mdx`);
+
+  return await getPostBySlugWithMdx(slug, mdxPath);
 }
 
 export async function getAllPosts() {

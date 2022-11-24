@@ -11,7 +11,7 @@ import 'styles/custom.css';
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     hljs.highlightAll();
-  }, []);
+  }, [pageProps]);
 
   return (
     <Layout>

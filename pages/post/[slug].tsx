@@ -11,22 +11,23 @@ const components = {};
 
 const Post: NextPage<Post> = ({ content, isMdx }) => {
   console.log(isMdx);
+
   return (
     <div>
-      <Markdown content={content}></Markdown>
+      <MDXRemote {...content} components={components}></MDXRemote>
     </div>
   );
-  return (
-    <div>
-      <main>
-        {isMdx ? (
-          <MDXRemote {...content} components={components}></MDXRemote>
-        ) : (
-          <Markdown content={content}></Markdown>
-        )}
-      </main>
-    </div>
-  );
+  // return (
+  //   <div>
+  //     <main>
+  //       {isMdx ? (
+
+  //       ) : (
+  //         <Markdown content={content}></Markdown>
+  //       )}
+  //     </main>
+  //   </div>
+  // );
 };
 
 export default Post;
