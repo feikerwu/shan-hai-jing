@@ -14,8 +14,6 @@ description: RK 算法 & KMP
 
 字符串匹配问题就是找到模式串在文本串中的位移 s
 
-<!-- 字符串匹配的概念 -->
-
 ## 暴力
 
 遍历文本串，对遍历到的每个位置 i, 判断 $T[i..i+m]$ 是否和模式串$P[1..m]$相等
@@ -86,18 +84,17 @@ f(T[s+1...s + m + 1]) = T[s+1] * 10 ^ (m - 1) + T[s + 2] * 10 ^ (m - 2) ... + T[
 
 下面介绍下 KMP 算法，KMP 算法由 Knuth Morris Pratt 三个大佬联合发明，KMP 算法名字由三个大佬名字首位字符组成。
 
-首先我们定义模式串的前缀函数 f(i) 为 模式串 P 中 P[1...i]相同前缀后缀的最大长度。对 P[1...m]中的每个 i，(i > 0 && i <= m), 用一个数组 next 记录。
+首先我们定义模式串的前缀函数 f(i) 为 模式串 P 中 P[1...i]相同前缀后缀的最大长度。对 P[1...m]中的每个 `i，(i > 0 && i <= m)`, 用一个数组 next 记录。
 
 之前提到暴力算法的时间复杂度很高是因为每次字符失配后，我们只是简单的将 s 位移加一，将之前的匹配信息舍去，造成计算重复。
 
 KMP 算法在每次失配后，会根据上一次的比对信息跳转到相应的 s 处，借助的就是上述的 next 数组。
 
-推导过程可以参考 [从头到尾彻底理解KMP](https://blog.csdn.net/v_JULY_v/article/details/7041827)，个人觉得这篇讲的非常透彻，这里就不班门弄斧了。
-
+推导过程可以参考 [从头到尾彻底理解 KMP](https://blog.csdn.net/v_JULY_v/article/details/7041827)，个人觉得这篇讲的非常透彻，这里就不班门弄斧了。
 
 以下是计算 next 数组的伪代码
 
-```
+```js
 get_next(P):
   m  = P.length
   使得 next 为长度为m的数组
@@ -114,7 +111,7 @@ get_next(P):
 
 以下是 KMP 的伪代码
 
-```
+```js
 KMP(T, P)
   n = T.length
   m = P.length
@@ -135,8 +132,6 @@ KMP(T, P)
 
 ## 参考
 
-+ [维基百科](https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95)
-+ [从头到尾彻底理解KMP](https://blog.csdn.net/v_JULY_v/article/details/7041827)
-+ [Finite Automata algorithm for Pattern Searching](https://www.geeksforgeeks.org/finite-automata-algorithm-for-pattern-searching/)
-
-
+- [维基百科](https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95)
+- [从头到尾彻底理解 KMP](https://blog.csdn.net/v_JULY_v/article/details/7041827)
+- [Finite Automata algorithm for Pattern Searching](https://www.geeksforgeeks.org/finite-automata-algorithm-for-pattern-searching/)

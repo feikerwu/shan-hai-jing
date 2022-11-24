@@ -15,7 +15,7 @@
 
 ### node
 
-- [node CLS 全链路追踪以及其实现原理](./content/blog/cls-in-node.md)
+- [node CLS 全链路追踪以及其实现原理](content/blog1/cls-in-node.md)
 - [nest 中 IoC & DI 的实现](./content/blog/IoT-in-nest.md)
 - [如何实现一个命令行的进度条](./content/blog/process-in-TTY.md)
 - [如何在 nodejs 内解析其它脚本](./content/blog/run-python-in-node.md)
