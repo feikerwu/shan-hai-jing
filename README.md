@@ -24,7 +24,7 @@
 
 ### 算法
 
-- [字符串匹配算法](./content/blog/algo-kmp.md)
+- [字符串匹配算法](content/blog/algo-kmp.md)
 - [最长上升子序列](./content/blog/algo-long-increasing-subsequence.md)
 - [搜索](./content/blog/algo-search.md)
 

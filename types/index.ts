@@ -2,8 +2,9 @@
 export type Post = {
   title: string;
   slug: string;
-  desc: string;
-  content: string;
-  date: string;
+  desc?: string;
+  // MD 或者 MDX 的文件内容
+  content: any;
+  date: Date | number;
   tags?: string[];
-};
+} & Record<string, any>;

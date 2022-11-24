@@ -1,15 +1,30 @@
 import type { NextPage } from 'next';
 import { getAllPosts, getPostBySlug } from 'services/blog';
 import Markdown from 'components/Markdown';
-
+import { MDXRemote } from 'next-mdx-remote';
 import markdownToHtml from 'utils/markdown';
 
 import type { Post } from 'types';
 
-const Post: NextPage<Post> = ({ content }) => {
+// 用于替换 mdx-remote 替换出来的 DOM 组件
+const components = {};
+
+const Post: NextPage<Post> = ({ content, isMdx }) => {
+  console.log(isMdx);
   return (
     <div>
       <Markdown content={content}></Markdown>
+    </div>
+  );
+  return (
+    <div>
+      <main>
+        {isMdx ? (
+          <MDXRemote {...content} components={components}></MDXRemote>
+        ) : (
+          <Markdown content={content}></Markdown>
+        )}
+      </main>
     </div>
   );
 };
@@ -21,9 +36,10 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug);
-
-  // post.content = await markdownToHtml(post.content);
+  const post = await getPostBySlug(params.slug);
+  if (!post.isMdx) {
+    post.content = await markdownToHtml(post.content);
+  }
 
   return {
     props: {
@@ -33,7 +49,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const paths = allPosts.map(({ slug }) => ({ params: { slug } }));
   return { paths, fallback: false };
 }

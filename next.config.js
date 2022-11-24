@@ -29,5 +29,5 @@ console.info(mdxConfig);
 
 module.exports = {
   ...nextConfig,
-  ...mdxConfig,
+  // ...mdxConfig,
 };

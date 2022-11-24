@@ -40,7 +40,10 @@ const PostItem: React.FC<Post> = ({ slug, date, title, desc, tags }) => {
 export default PostList;
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
+  allPosts.forEach(item => {
+    item.date = Number(item.date);
+  });
   return {
     props: { allPosts },
   };
