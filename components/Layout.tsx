@@ -3,11 +3,11 @@ import styles from 'styles/layout.module.css';
 import NavBar from './layouts/navbar';
 import Footer from './layouts/footer';
 
-const Layout: FC<{ children: any }> = ({ children }) => {
+const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className={styles.layout}>
       <NavBar></NavBar>
-      <div>{children}</div>
+      <main>{children}</main>
       <Footer></Footer>
     </div>
   );
