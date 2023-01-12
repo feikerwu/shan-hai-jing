@@ -15,7 +15,7 @@ const NavBar = () => {
         <Link href={'/'} passHref legacyBehavior>
           <div className={styles.title}>{`feiker's blog`}</div>
         </Link>
-        <div className={styles.desc}>编程小扎</div>
+        <div className={styles.desc}>编程小札</div>
       </div>
 
       <div className={styles.navBarRight}>
