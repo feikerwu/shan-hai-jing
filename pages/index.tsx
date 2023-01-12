@@ -24,9 +24,9 @@ const PostItem: React.FC<Post> = ({ slug, date, title, desc, tags }) => {
   return (
     <div className={styles.item}>
       <Link href={`/post/${slug}`}>
-        <h2>
+        <div className={styles.title}>
           <a>{title}</a>
-        </h2>
+        </div>
       </Link>
 
       <div className={styles.date}>{dayjs(date).format('YYYY-MM-DD')}</div>

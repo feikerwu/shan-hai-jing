@@ -1,5 +1,13 @@
 .item {
-  margin-bottom: 60px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin-right: 20px;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .date {
