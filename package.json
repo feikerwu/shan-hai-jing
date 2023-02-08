@@ -27,6 +27,7 @@
     "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.1",
     "remark-math": "^5.1.1",
+    "@vercel/analytics": "^0.1.8",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
