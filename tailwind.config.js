@@ -8,9 +8,6 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    fontFamily: {
-      // body: ['LXGW WenKai Mono'],
-    },
     container: {
       center: true,
     },
