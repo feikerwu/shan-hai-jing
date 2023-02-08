@@ -13,8 +13,11 @@ const NavBar = () => {
     <div className={styles.navbar}>
       <div className={styles.navbarLeft}>
         <Link href={'/'} passHref legacyBehavior>
-          <div className={styles.title}>{`feiker's blog`}</div>
+          <div
+            className={`text-3xl font-bold underline`}
+          >{`feiker's blog`}</div>
         </Link>
+
         <div className={styles.desc}>编程小札</div>
       </div>
 

@@ -25,7 +25,7 @@ const mdxConfig = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 });
 
-console.info(mdxConfig);
+// console.info(mdxConfig);
 
 module.exports = {
   ...nextConfig,
