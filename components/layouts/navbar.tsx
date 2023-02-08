@@ -4,24 +4,24 @@ import Link from 'next/link';
 const links = [
   {
     title: 'github',
-    url: 'https://github.com/',
+    url: 'https://github.com/feikerwu',
   },
 ];
 
 const NavBar = () => {
   return (
-    <div className={styles.navbar}>
-      <div className={styles.navbarLeft}>
+    <div className='container flex justify-between my-12'>
+      <div>
         <Link href={'/'} passHref legacyBehavior>
           <div
-            className={`text-3xl font-bold underline`}
+            className={`text-3xl font-bold cursor-pointer`}
           >{`feiker's blog`}</div>
         </Link>
 
-        <div className={styles.desc}>编程小札</div>
+        <div>编程小札</div>
       </div>
 
-      <div className={styles.navBarRight}>
+      <div>
         {links.map(link => (
           <a href={link.url} key={link.title}>
             {link.title}

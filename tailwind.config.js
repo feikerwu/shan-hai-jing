@@ -9,7 +9,10 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      body: ['LXGW WenKai Mono'],
+      // body: ['LXGW WenKai Mono'],
+    },
+    container: {
+      center: true,
     },
     extend: {},
   },

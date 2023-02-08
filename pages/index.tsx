@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { getAllPosts } from 'services/blog';
 import dayjs from 'dayjs';
-import styles from 'styles/post.module.css';
+
 import type { Post } from 'types';
 
 type ListPageProps = {
@@ -22,14 +22,16 @@ const PostList: NextPage<ListPageProps> = ({ allPosts }) => {
 
 const PostItem: React.FC<Post> = ({ slug, date, title, desc, tags }) => {
   return (
-    <div className={styles.item}>
+    <div className='flex items-end my-2'>
       <Link href={`/post/${slug}`}>
-        <div className={styles.title}>
+        <div className='text-lg font-medium pr-4'>
           <a>{title}</a>
         </div>
       </Link>
 
-      <div className={styles.date}>{dayjs(date).format('YYYY-MM-DD')}</div>
+      <div className='text-sm text-zinc-900 pb-0.5'>
+        {dayjs(date).format('YYYY-MM-DD')}
+      </div>
 
       {/* <p className={styles.desc}> */}
       {/* {desc} */}
