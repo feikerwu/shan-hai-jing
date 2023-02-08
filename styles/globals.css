@@ -2,15 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
+/* 设置基础 */
+@layer base {
+  html {
+    @apply text-base;
+    font-family: 'LXGW WenKai Mono';
+  }
+
+  h1 {
+    @apply text-2xl font-semibold mb-8;
+  }
+
+  h2 {
+    @apply text-xl font-semibold mt-4 mb-6;
+  }
+
+  h3 {
+    @apply text-lg font-semibold mt-4 mb-6;
+  }
+
+  li {
+    @apply list-disc mb-1;
+  }
+
+  a {
+    @apply no-underline transition delay-200 hover:text-purple-800 cursor-pointer hover:transition hover:delay-200 hover:text-lg;
+  }
+  /* ... */
+}
+
+/* html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+} */
 
-a {
+/* a {
   color: #333;
   text-decoration: none;
   transition: 0.3s;
@@ -23,28 +52,4 @@ a:active {
   color: var(--select-text-bg-color);
   box-shadow: 0 1px 0 0 #fff, 0 3px 0 0 var(--select-text-bg-color);
   cursor: pointer;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-  padding: 0;
-}
-
-h2 {
-  font-size: 1.5em;
-  line-height: 1.5em;
-}
-
-body {
-  color: #000;
-}
-
-img {
-  width: 100%;
-}
+} */
