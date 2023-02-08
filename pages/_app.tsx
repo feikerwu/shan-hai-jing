@@ -5,8 +5,6 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-light.css';
 import { useEffect } from 'react';
 
-import 'styles/custom.css';
-
 import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
