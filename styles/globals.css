@@ -26,7 +26,7 @@
   }
 
   a {
-    @apply no-underline transition delay-200 hover:text-purple-800 cursor-pointer hover:transition hover:delay-200 hover:text-lg;
+    @apply no-underline transition delay-100 hover:text-sky-500 cursor-pointer hover:transition hover:delay-100;
   }
   /* ... */
 }
