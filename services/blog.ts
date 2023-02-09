@@ -34,8 +34,8 @@ export function getPostBySlugWithMd(slug: string): Post {
 
   const result = {
     isMdx: false,
-    date: +new Date(),
-    title: slug,
+    date: data.date ? +new Date(data.date) : Date.now(),
+    title: data.title || slug,
     desc: excerpt,
     content,
     slug,
@@ -43,7 +43,7 @@ export function getPostBySlugWithMd(slug: string): Post {
   };
 
   // Date 对象在next的page里序列化会报错
-  result.date = +new Date(result.date);
+  // result.date = +new Date(result.date);
 
   return result;
 }
@@ -66,15 +66,14 @@ export async function getPostBySlugWithMdx(
 
   let result = {
     isMdx: true,
-    date: +new Date(),
-    title: path,
+    date: data.date ? +new Date(data.date) : Date.now(),
+    // date: new Date(data.date || new Date()),
+    title: data.title || slug,
     desc: excerpt,
     content: mdxSource,
     slug,
     ...data,
   };
-
-  result.date = +new Date();
 
   return result;
 }
