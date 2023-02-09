@@ -6,7 +6,7 @@
 @layer base {
   html {
     @apply text-base;
-    font-family: 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji';
+    font-family: '-apple-system,arial,sans-serif';
   }
 
   h1 {
@@ -27,6 +27,14 @@
 
   a {
     @apply no-underline transition delay-100 hover:text-sky-500 cursor-pointer hover:transition hover:delay-100;
+  }
+
+  math {
+    @apply my-8 container;
+  }
+
+  pre {
+    @apply my-4;
   }
   /* ... */
 }
