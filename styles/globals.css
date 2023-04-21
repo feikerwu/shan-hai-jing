@@ -3,41 +3,6 @@
 @tailwind utilities;
 
 /* 设置基础 */
-@layer base {
-  html {
-    @apply text-base;
-    font-family: '-apple-system,arial,sans-serif';
-  }
-
-  h1 {
-    @apply text-2xl font-semibold mb-8;
-  }
-
-  h2 {
-    @apply text-xl font-semibold mt-4 mb-6;
-  }
-
-  h3 {
-    @apply text-lg font-semibold mt-4 mb-6;
-  }
-
-  li {
-    @apply list-disc mb-1;
-  }
-
-  a {
-    @apply no-underline transition delay-100 hover:text-sky-500 cursor-pointer hover:transition hover:delay-100;
-  }
-
-  math {
-    @apply my-8 container;
-  }
-
-  pre {
-    @apply my-4;
-  }
-  /* ... */
-}
 
 /* html,
 body {

@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Layout from 'components/Layout';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-light.css';
+import 'highlight.js/styles/an-old-hope.css';
 import { useEffect } from 'react';
 
 import { Analytics } from '@vercel/analytics/react';

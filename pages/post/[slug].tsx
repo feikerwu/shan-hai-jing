@@ -15,7 +15,7 @@ const Post: NextPage<Post> = ({ content, isMdx, slug }) => {
         <title>{slug}</title>
       </Head>
       <div>
-        <main>
+        <main className='prose prose-slate'>
           <MDXRemote {...content} components={components}></MDXRemote>
         </main>
       </div>

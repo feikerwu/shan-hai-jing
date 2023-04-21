@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+// const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     // './app/**/*.{js,ts,jsx,tsx}',
@@ -13,5 +16,6 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  // 使用官方的书写插件
+  plugins: [require('@tailwindcss/typography')],
 };
