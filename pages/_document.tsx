@@ -12,7 +12,7 @@ class MyDocument extends Document {
           />
           <link
             rel='shortcut icon'
-            href='/favicon.png'
+            href='/favicon.svg'
             type='image/x-icon'
           ></link>
           <script
