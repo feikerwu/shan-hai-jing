@@ -5,6 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <title>feiker blog</title>
+
         <Head>
           <link
             href='https://fonts.googleapis.com/css2?family=Inter&display=optional'
@@ -15,11 +16,11 @@ class MyDocument extends Document {
             href='/favicon.svg'
             type='image/x-icon'
           ></link>
+
           <script
             async
-            defer
-            data-website-id='8371f278-5ff1-45ce-aac2-2f2d64b975d0'
-            src='https://umami-production-a72b.up.railway.app/umami.js'
+            src='https://analytics.umami.is/script.js'
+            data-website-id='7f523289-000a-4930-84fb-19dc9e34bc31'
           ></script>
         </Head>
         <body>
