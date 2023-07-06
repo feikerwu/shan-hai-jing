@@ -17,6 +17,10 @@ let cached: Post[] = [];
  * 获取到所有的博客markdown文件列表
  */
 export function getFiles(dir: string): Post[] {
+  if (cached && cached.length) {
+    return cached;
+  }
+
   const files = fs.readdirSync(dir);
 
   let allPosts = files.map(file => {

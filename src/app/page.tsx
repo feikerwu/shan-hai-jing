@@ -1,26 +1,25 @@
 import HelloWorld from './content/blog/cache-lock.mdx';
-import fs from 'node:fs';
 import path from 'node:path';
+import Link from 'next/link';
 
 import { getFiles } from '@/utils/markdown';
+import type { Post } from '@/utils/markdown';
 
-getFiles('src/app/content/blog');
-
-async function getAllPosts() {
-  const files = fs.readdirSync(
-    path.resolve(path.resolve(), 'src/app/content/blog')
+function getBlogLink(post: Post) {
+  const href = `blog/${post.slug}`;
+  return (
+    <Link href={href} key={post.slug}>
+      {post.title}
+    </Link>
   );
-  console.log(files);
-  return files;
+}
+
+function getBlogLinkItem(post: Post) {
+  return <div>{getBlogLink(post)}</div>;
 }
 
 export default async function Page() {
-  let files = await getAllPosts();
-  return (
-    <div>
-      {files.map(file => (
-        <div key={file}>{file}</div>
-      ))}
-    </div>
-  );
+  let files = getFiles(path.resolve('src/app/content/blog'));
+
+  return <div>{files.map(file => getBlogLinkItem(file))}</div>;
 }
