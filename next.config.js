@@ -7,6 +7,9 @@ const nextConfig = {
 };
 
 const withMDX = require('@next/mdx')({
+  options: {
+    providerImportSource: '@mdx-js/react',
+  },
   extension: /\.(md|mdx)$/,
 });
 

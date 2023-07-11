@@ -25,11 +25,13 @@ export function getFiles(dir: string): Post[] {
 
   let allPosts = files.map(file => {
     return {
-      slug: file.replace(`.mdx?`, ''),
+      slug: file.replace(/.md(x)?/, ''),
       path: path.resolve(dir, file),
       ...getMarkdownMetaData(path.resolve(dir, file)),
     } as Post;
   });
+
+  console.log(allPosts.map(a => a.slug));
 
   cached = allPosts;
 
@@ -54,6 +56,9 @@ export function getMarkdownMetaData(path: string) {
 }
 
 export function getPostContentBySlug(slug: string) {
+  const allPosts = getFiles(
+    path.resolve(process.cwd(), 'src/app/content/blog')
+  );
   const post = cached.find(post => post.slug === slug);
 
   if (!post) {
