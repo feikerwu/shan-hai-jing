@@ -5,14 +5,6 @@ title: node CLS 全链路追踪以及其实现原理
 description: node 中如何追踪某个请求的全链路
 ---
 
----
-title: node CLS 全链路追踪以及其实现原理
-date: 2020-06-07
-description: node 中如何追踪某个请求的全链路
----
-
-#blog
-
 考虑这样一个问题，在复杂系统中，每一个请求过来，我们会调用不同的异步服务(db, fs，微服务等等)，调用过程中如果某一环节出现问题，如何去做链路追踪，或者说如何获取到原始的请求上下文。
 
 在 JAVA/C++ 等多线程服务中，可以通过 TLS(Thread-local storage，线程局部存储)获取请求上下文，但是在 node 这种单线程事件驱动的系统中，如何去请求获取请求上下文。
@@ -184,4 +176,3 @@ clk-hooked 通过 async_hooks 重写了 clk 监听异步资源的方式，源码
 - [github clk](https://github.com/othiym23/node-continuation-local-storage)
 - [async_hooks](https://nodejs.org/api/async_hooks.html)
 - [express-http-context](https://github.com/skonves/express-http-context)
-

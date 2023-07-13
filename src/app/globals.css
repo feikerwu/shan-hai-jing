@@ -16,6 +16,12 @@
   }
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0 auto;
   color: rgb(var(--foreground-rgb));

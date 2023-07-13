@@ -1,25 +1,41 @@
-import HelloWorld from './content/blog/cache-lock.mdx';
 import path from 'node:path';
 import Link from 'next/link';
 
-import { getFiles } from '@/utils/markdown';
-import type { Post } from '@/utils/markdown';
+import { allPosts, Post } from 'contentlayer/generated';
+import dayjs from 'dayjs';
 
-function getBlogLink(post: Post) {
-  const href = `blog/${post.slug}`;
+function PostCard(post: Post) {
   return (
-    <Link href={href} key={post.slug}>
-      {post.title}
-    </Link>
+    <div className='mb-8'>
+      <h2 className='mb-1 text-xl'>
+        <Link
+          href={post.url}
+          className='text-blue-700 hover:text-blue-900 dark:text-blue-400'
+        >
+          {post.title}
+        </Link>
+      </h2>
+      <time
+        dateTime={dayjs(post.date).format('YYYY-MM-DD')}
+        className='mb-2 block text-xs text-gray-600'
+      ></time>
+    </div>
   );
 }
 
-function getBlogLinkItem(post: Post) {
-  return <div>{getBlogLink(post)}</div>;
-}
+export default function Home() {
+  const posts = allPosts.sort((a, b) =>
+    dayjs(a.date).isBefore(b.date) ? 1 : -1
+  );
 
-export default async function Page() {
-  let files = getFiles(path.resolve('src/app/content/blog'));
-
-  return <div>{files.map(file => getBlogLinkItem(file))}</div>;
+  return (
+    <div className='mx-auto max-w-xl py-8'>
+      <h1 className='mb-8 text-center text-2xl font-black'>
+        Next.js + Contentlayer Example
+      </h1>
+      {posts.map((post, idx) => (
+        <PostCard key={idx} {...post} />
+      ))}
+    </div>
+  );
 }
