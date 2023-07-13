@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={'prose lg:prose-xl'}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
