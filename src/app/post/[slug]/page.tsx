@@ -10,15 +10,7 @@ type PostPageParams = {
   slug: string;
 };
 
-export default function PostPage({
-  params,
-  ...rest
-}: {
-  params: PostPageParams;
-}) {
-  console.log({ params });
-  console.log({ rest });
-
+export default function PostPage({ params }: { params: PostPageParams }) {
   const { slug } = params;
   const post = allPosts.find(post => post._raw.flattenedPath === slug) as Post;
 
