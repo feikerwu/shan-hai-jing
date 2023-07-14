@@ -7,18 +7,20 @@ import dayjs from 'dayjs';
 function PostCard(post: Post) {
   return (
     <div className='mb-8'>
-      <h2 className='mb-1 text-xl'>
+      <div className='text'>
         <Link
           href={post.url}
           className='text-blue-700 hover:text-blue-900 dark:text-blue-400'
         >
           {post.title}
         </Link>
-      </h2>
-      <time
-        dateTime={dayjs(post.date).format('YYYY-MM-DD')}
-        className='mb-2 block text-xs text-gray-600'
-      ></time>
+        <time
+          dateTime={dayjs(post.date).format('YYYY-MM-DD')}
+          className='mb-2 text-xs text-gray-600 inline ml-2'
+        >
+          {dayjs(post.date).format('YYYY-MM-DD')}
+        </time>
+      </div>
     </div>
   );
 }
@@ -31,7 +33,7 @@ export default function Home() {
   return (
     <div className='mx-auto max-w-xl py-8'>
       <h1 className='mb-8 text-center text-2xl font-black'>
-        Next.js + Contentlayer Example
+        feiker 的编程日志
       </h1>
       {posts.map((post, idx) => (
         <PostCard key={idx} {...post} />
