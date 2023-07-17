@@ -1,5 +1,6 @@
 import { allPosts, Post } from 'contentlayer/generated';
 import MDXContent from '@/app/components/mdx-content';
+import MDXComponents from '@/app/components/mdx-components';
 
 // 生成动态路由头部的 slug 信息
 export function generateStaticParams() {
@@ -16,7 +17,10 @@ export default function PostPage({ params }: { params: PostPageParams }) {
 
   return (
     <article className={'prose lg:prose-xl m-auto'}>
-      <MDXContent code={post?.body.code}></MDXContent>
+      <MDXContent
+        code={post?.body.code}
+        components={MDXComponents}
+      ></MDXContent>
     </article>
   );
 }
