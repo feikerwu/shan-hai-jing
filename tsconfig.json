@@ -31,7 +31,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".contentlayer/generated",
-    "test/demo-remark-toc.js"
+    "test/demo-remark-toc.mjs"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
 import fsPromise from 'node:fs/promises';
 import fs from 'node:fs';
 import dayjs from 'dayjs';
+import graymatter from 'gray-matter';
 
 import path from 'node:path';
 // import chalk from 'chalk';
@@ -54,25 +55,6 @@ function copyDir(source: string, target: string) {
       fs.copyFileSync(sourceFile, targetFile);
     }
   });
-}
-
-function getMarkdownMetaData(content: string) {
-  const metadataReg = /^---\n([\s\S]*?)\n---/;
-  const match = content.toString().match(metadataReg);
-  if (match && match[1]) {
-    let metadataStr = match[1];
-    const metadata: Record<string, string> = {};
-    const lines = metadataStr.split('\n');
-    for (let line of lines) {
-      const [key, value] = line.split(':');
-      if (key && value) {
-        metadata[key.trim()] = value.trim();
-      }
-    }
-
-    return metadata;
-  }
-  return {};
 }
 
 type FileType = {
@@ -138,29 +120,24 @@ async function generateFiles(files: FileType[], distDir: string) {
    */
 
   for (let file of files) {
-    const content = fs.readFileSync(file.path, { encoding: 'utf-8' });
+    const fileContent = fs.readFileSync(file.path, { encoding: 'utf-8' });
 
-    let contentRemoveTags = content.replace(TagReg, '');
+    let contentRemoveTags = fileContent.replace(TagReg, '');
+
+    const { data, content } = graymatter(contentRemoveTags);
 
     const metadata = {
       tags: file.tags.join(','),
       date: file.updateTime,
       title: file.name.replace('.md', ''),
-      ...getMarkdownMetaData(content),
+      ...data,
     };
 
-    const front = [
-      '---',
-      ...Object.entries(metadata).map(([key, value]) => `${key}: ${value}`),
-      '---',
-    ].join('\n');
-
-    contentRemoveTags = `${front}\n\n${contentRemoveTags}`;
-
+    contentRemoveTags = graymatter.stringify(content, metadata);
     /**
      * todo: 删除双链文件
      */
-    fs.writeFileSync(path.join(distDir, file.name), contentRemoveTags, {
+    fs.writeFileSync(path.join(distDir, file.name + 'x'), contentRemoveTags, {
       encoding: 'utf-8',
     });
   }
@@ -178,10 +155,7 @@ async function run() {
     encoding: 'utf-8',
   });
 
-  await generateFiles(
-    filterResult,
-    path.join(process.cwd(), 'src/app/content/blog')
-  );
+  await generateFiles(filterResult, path.join(process.cwd(), '/blog'));
 }
 
 run();
