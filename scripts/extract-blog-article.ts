@@ -4,9 +4,8 @@ import dayjs from 'dayjs';
 import graymatter from 'gray-matter';
 
 import path from 'node:path';
-// import chalk from 'chalk';
 
-const TagReg = /(^|\sst)#[\w\\]+/g;
+const TagReg = /(?=(^|\s))#[\w\/]+/gm;
 const allFilesNeedFiller = ['#blog'];
 const backupDir = path.join(process.cwd(), '.backup');
 
@@ -14,16 +13,16 @@ const filter = (name: string, path: string) =>
   name.endsWith('.md') && !/daily|Excalidraw/.test(path);
 
 const getFileTags = (content: string): string[] => {
+  let a = content.match(TagReg) || [];
+  if (a.length) {
+    console.log(a);
+  }
   // TODO: 优化正则，匹配全局
   let tags: string[] = [];
   let lines = content.split('\n');
   for (let line of lines) {
     let curTags = line.match(TagReg) || [];
     tags = [...tags, ...curTags];
-  }
-
-  if (tags.length) {
-    console.log(tags);
   }
 
   return tags;
