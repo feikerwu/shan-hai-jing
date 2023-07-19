@@ -5,6 +5,9 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
+import remarkMath from 'remark-math';
+// math support in rehype
+import rehypeKatex from 'rehype-katex';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -39,6 +42,7 @@ export default makeSource({
        * 添加 markdown 的 toc 支持
        */
       remarkToc,
+      remarkMath,
     ],
     rehypePlugins: [
       rehypeSlug,
@@ -73,6 +77,7 @@ export default makeSource({
         },
       ],
       rehypePrettyCode,
+      rehypeKatex,
     ],
   },
 });

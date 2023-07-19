@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 
 function PostCard(post: Post) {
   return (
-    <div className='mb-8'>
+    <div className='mb-4'>
       <div className='text'>
         <Link
           href={post.url}
